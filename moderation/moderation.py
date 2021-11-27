@@ -479,9 +479,9 @@ class Moderation(commands.Cog):
             return
         return await channel.send(embed=embed)
  
-    @commands.command(name="pban", aliases=['fban'])
+    @commands.command(usage="<Member>")
     @checks.has_permissions(PermissionLevel.MODERATOR)
-    async def fban(self, ctx, member: discord.Member = None, reason = None):
+    async def pban(self, ctx, member: discord.Member = None, reason = None):
         await ctx.message.delete()
         if not member:
             embed = discord.Embed(title="Error", description="Please provide a user to ban!", color=self.bot.error_color)
