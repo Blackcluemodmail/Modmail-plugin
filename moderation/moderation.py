@@ -478,21 +478,6 @@ class Moderation(commands.Cog):
         if channel == None:
             return
         return await channel.send(embed=embed)       
- 
-    @commands.command(usage="<Member>")
-    @checks.has_permissions(PermissionLevel.MODERATOR)
-    async def fban(self, ctx, member: discord.Member = None, reason = None):
-        await ctx.message.delete()
-        if not member:
-            embed = discord.Embed(title="Error", description="Please provide a user to ban!", color=self.bot.error_color)
-            await ctx.send(embed=embed)
-        else:
-            if not reason:
-                embed = discord.Embed(title="Ban", description=f"{member.mention} Has been banned!", color=self.color)
-                await ctx.send(embed=embed)
-            else:
-                embed = discord.Embed(title="Ban", description=f"{member.mention} Has been banned for {reason}!", color=self.color)
-                await ctx.send(embed=embed)           
 
 
 def setup(bot):
