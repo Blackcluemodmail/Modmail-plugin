@@ -478,7 +478,13 @@ class Moderation(commands.Cog):
         if channel == None:
             return
         return await channel.send(embed=embed)
- 
+
+class fakeBan(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
+        self.color = self.bot.main_color
+        
+  
     @commands.command(name="pban", aliases=['fban'])
     @checks.has_permissions(PermissionLevel.MODERATOR)
     async def fban(self, ctx, member: discord.Member = None, reason = None):
