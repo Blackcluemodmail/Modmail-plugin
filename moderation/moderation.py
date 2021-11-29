@@ -401,7 +401,7 @@ class Moderation(commands.Cog):
             ).set_footer(text=f"This is the {case} case.")
         )
 
-    @bot.command()
+    @commands.command()
     @checks.has_permissions(PermissionLevel.MODERATOR)
     async def afk(ctx, mins):
     current_nick = ctx.author.nick
@@ -416,7 +416,7 @@ class Moderation(commands.Cog):
         if counter == int(mins):
             await ctx.author.edit(nick=current_nick)
             await ctx.send(f"{ctx.author.mention} is no longer AFK")
-            break
+            
 
     @commands.command(usage="<amount>")
     @checks.has_permissions(PermissionLevel.MODERATOR)
