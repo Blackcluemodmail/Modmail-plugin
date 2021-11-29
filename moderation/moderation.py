@@ -399,24 +399,7 @@ class Moderation(commands.Cog):
                 description=f"{member} has been unmuted.",
                 color=self.bot.main_color,
             ).set_footer(text=f"This is the {case} case.")
-        )
-
-    @commands.command()
-    @checks.has_permissions(PermissionLevel.MODERATOR)
-    async def afk(ctx, mins):
-    current_nick = ctx.author.nick
-    await ctx.send(f"{ctx.author.mention} has gone afk for {mins} minutes.")
-    await ctx.author.edit(nick=f"{ctx.author.name} [AFK]")
-
-    counter = 0
-    while counter <= int(mins):
-        counter += 1
-        await asyncio.sleep(60)
-
-        if counter == int(mins):
-            await ctx.author.edit(nick=current_nick)
-            await ctx.send(f"{ctx.author.mention} is no longer AFK")
-            
+        )            
 
     @commands.command(usage="<amount>")
     @checks.has_permissions(PermissionLevel.MODERATOR)
