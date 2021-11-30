@@ -16,19 +16,6 @@ class Moderation(commands.Cog):
         self.bot = bot
         self.db = bot.api.get_plugin_partition(self)
 
-    async def cog_command_error(self, ctx, error):
-        """Checks errors"""
-        error = getattr(error, "original", error)
-        if isinstance(error, commands.CheckFailure):
-            return await ctx.send(
-                embed=discord.Embed(
-                    title="Error",
-                    description="You don't have enough permissions to run this command!",
-                    color=discord.Color.red(),
-                ).set_footer(text="Are you a moderator?")
-            )
-        raise error
-
     @commands.Cog.listener()
     async def on_guild_channel_create(self, channel):
         """Sets up mute role permissions for the channel."""
