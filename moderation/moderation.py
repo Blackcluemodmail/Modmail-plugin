@@ -276,11 +276,13 @@ class Moderation(commands.Cog):
             pass
 
         try:
-           banned_user = await ctx.guild.bans()
-           member_name, member_discriminator = member.split('#')
+        banned_user = await ctx.guild.bans()
+
+        member_name, member_discriminator = member.split('#')
 	for ban_entry in banned_users:
 		user = ban_entry.user
 
+        if (user.name, user.discriminator) == (member_name, member_discriminator):
             await member.unban(reason=reason)
         except discord.errors.Forbidden:
             return await ctx.send(
