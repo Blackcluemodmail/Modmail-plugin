@@ -257,6 +257,57 @@ class Moderation(commands.Cog):
 
     @commands.command(usage="<member> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
+    async def unban(self, ctx, member: discord.Member = None, *, reason=None):
+        """Unbans the specified member."""
+        if member == None:
+            return await ctx.send_help(ctx.command)
+
+        if reason != None:
+            if not reason.endswith("."):
+                reason = reason + "."
+
+        msg = f"You have been unbanned from {ctx.guild.name}" + (
+            f" for: {reason}" if reason else "."
+        )
+
+        try:
+            await member.send(msg)
+        except discord.errors.Forbidden:
+            pass
+
+        try:
+            await member.unban(reason=reason)
+        except discord.errors.Forbidden:
+            return await ctx.send(
+                embed=discord.Embed(
+                    title="Error",
+                    description="I don't have enough permissions to unban them.",
+                    color=discord.Color.red(),
+                ).set_footer(text="Please fix the permissions.")
+            )
+
+        case = await self.get_case()
+
+        await self.log(
+            guild=ctx.guild,
+            embed=discord.Embed(
+                title="Unban",
+                description=f"{member} has been unbanned by {ctx.author.mention}"
+                + (f" for: {reason}" if reason else "."),
+                color=self.bot.main_color,
+            ).set_footer(text=f"This is the {case} case."),
+        )
+
+        await ctx.send(
+            embed=discord.Embed(
+                title="Success",
+                description=f"{member} has been unbanned.",
+                color=self.bot.main_color,
+            ).set_footer(text=f"This is the {case} case.")
+        )
+
+    @commands.command(usage="<member> [reason]")
+    @checks.has_permissions(PermissionLevel.MODERATOR)
     async def mute(self, ctx, member: discord.Member = None, *, reason=None):
         """Mutes the specified member."""
         if member == None:
