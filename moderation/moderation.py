@@ -258,6 +258,7 @@ class Moderation(commands.Cog):
     @commands.command(usage="<member> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
     async def unban(self, ctx, member: discord.Member = None, *, reason=None):
+        banned_user = await ctx.guild.bans()
         """Unbans the specified member."""
         if member == None:
             return await ctx.send_help(ctx.command)
