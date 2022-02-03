@@ -257,17 +257,54 @@ class Moderation(commands.Cog):
 
     @commands.command(usage="<member> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
-    async def unban(ctx, *, member):
-    banned_user = await ctx.guild.bans()
-    member_name, member_discriminator = member.split("#")
-    for ban_entry in banned_user:
-        user = ban_entry.user
+    async def unban(self, ctx, member: discord.Member = None, *, reason=None):
+        """Bans the specified member."""
+        if member == None:
+            return await ctx.send_help(ctx.command)
 
-        if (user.name, user.discriminator) == (member_name, member_discriminator):
-            await ctx.guild.unban(user)
-            embed = discord.Embed(title="Fatto!", description=f"Ho sbannato {user.mention}!", color=discord.Color.green())
-            await ctx.send(embed=embed)
-            return
+        if reason != None:
+            if not reason.endswith("."):
+                reason = reason + "."
+
+        msg = f"You have been unbanned from {ctx.guild.name}" + (
+            f" for: {reason}" if reason else "."
+        )
+
+        try:
+            await member.send(msg)
+        except discord.errors.Forbidden:
+            pass
+
+        try:
+            await member.unban(reason=reason)
+        except discord.errors.Forbidden:
+            return await ctx.send(
+                embed=discord.Embed(
+                    title="Error",
+                    description="I don't have enough permissions to unban them.",
+                    color=discord.Color.red(),
+                ).set_footer(text="Please fix the permissions.")
+            )
+
+        case = await self.get_case()
+
+        await self.log(
+            guild=ctx.guild,
+            embed=discord.Embed(
+                title="Unban",
+                description=f"{member} has been unbanned by {ctx.author.mention}"
+                + (f" for: {reason}" if reason else "."),
+                color=self.bot.main_color,
+            ).set_footer(text=f"This is the {case} case."),
+        )
+
+        await ctx.send(
+            embed=discord.Embed(
+                title="Success",
+                description=f"{member} has been unbanned.",
+                color=self.bot.main_color,
+            ).set_footer(text=f"This is the {case} case.")
+        )
         
     @commands.command(usage="<member> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
