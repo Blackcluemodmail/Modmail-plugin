@@ -425,15 +425,7 @@ class Moderation(commands.Cog):
                 description=f"{amount} {messages} {have} been purged by {ctx.author.mention}.",
                 color=self.bot.main_color,
             ).set_footer(text=f"This is the {case} case."),
-        )
-
-        await ctx.send(
-            embed=discord.Embed(
-                title="Success",
-                description=f"Purged {amount} {messages}.",
-                color=self.bot.main_color,
-            ).set_footer(text=f"This is the {case} case.")
-        )
+       )
 
     async def get_case(self):
         """Gives the case number."""
