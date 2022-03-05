@@ -309,7 +309,7 @@ class Moderation(commands.Cog):
                 )
             )
 
-        msg = f"You have been muted from {ctx.guild.name}" + (
+        msg = f"You have been muted from {ctx.guild.name} for {time}" + (
             f" for: {reason}" if reason else "."
         )
 
@@ -335,7 +335,7 @@ class Moderation(commands.Cog):
             guild=ctx.guild,
             embed=discord.Embed(
                 title="Mute",
-                description=f"{member} has been muted by {ctx.author.mention}"
+                description=f"{member} has been muted by {ctx.author.mention} for {time}"
                 + (f" for: {reason}" if reason else "."),
                 color=self.bot.main_color,
             ).set_footer(text=f"This is the {case} case."),
