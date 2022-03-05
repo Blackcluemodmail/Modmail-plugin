@@ -361,6 +361,7 @@ class Moderation(commands.Cog):
             embed=discord.Embed(
                 title="Mute",
                 description=f"{member} has been unmuted automatically after {time}s."
+                + (f" with mute cause: {reason}" if reason else "."),
                 color=self.bot.main_color,
             ).set_footer(text=f"This is the {case} case."),
         )
