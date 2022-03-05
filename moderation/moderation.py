@@ -280,7 +280,7 @@ class Moderation(commands.Cog):
 
     @commands.command(usage="<member> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
-    async def mute(self, ctx, member: discord.Member = None, *, reason=None):
+    async def mute(self, ctx, member: discord.Member = None, reason=None, *, time:TimeConverter = None):
         """Mutes the specified member."""
         if member == None:
             return await ctx.send_help(ctx.command)
@@ -309,7 +309,7 @@ class Moderation(commands.Cog):
                 )
             )
 
-        msg = f"You have been muted from {ctx.guild.name}" + (
+        msg = f"You have been muted from {ctx.guild.name} for {time}s" + (
             f" for: {reason}" if reason else "."
         )
 
@@ -329,13 +329,11 @@ class Moderation(commands.Cog):
                 ).set_footer(text="Please fix the permissions.")
             )
 
-        case = await self.get_case()
-
         await self.log(
             guild=ctx.guild,
             embed=discord.Embed(
                 title="Mute",
-                description=f"{member} has been muted by {ctx.author.mention}"
+                description=f"{member} has been muted by {ctx.author.mention} for {time}"
                 + (f" for: {reason}" if reason else "."),
                 color=self.bot.main_color,
             ).set_footer(text=f"This is the {case} case."),
@@ -344,10 +342,13 @@ class Moderation(commands.Cog):
         await ctx.send(
             embed=discord.Embed(
                 title="Success",
-                description=f"{member} has been muted.",
+                description=f"{member} has been muted for {time}.",
                 color=self.bot.main_color,
             ).set_footer(text=f"This is the {case} case.")
         )
+          elif time:
+                await asyncio.sleep(time)
+                await member.remove_roles(role) 
 
     @commands.command(usage="<member> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
