@@ -297,10 +297,6 @@ class Moderation(commands.Cog):
             if not reason.endswith("."):
                 reason = reason + "."
 
-        if time:
-            await asyncio.sleep(time)
-            await member.remove_roles(role)
-
         if no_role:
             return await ctx.send(
                 embed=discord.Embed(
@@ -350,6 +346,10 @@ class Moderation(commands.Cog):
                 color=self.bot.main_color,
             ).set_footer(text=f"This is the {case} case.")
         )
+         if time:
+             await asyncio.sleep(time)
+             await member.remove_roles(role)
+             print(6)
 
     @commands.command(usage="<member> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
