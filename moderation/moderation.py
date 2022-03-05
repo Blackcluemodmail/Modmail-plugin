@@ -504,7 +504,12 @@ class Moderation(commands.Cog):
             await ctx.send(embed=embed)
             print(3)
         else:
-            await member.add_roles(role)
+            role = discord.utils.get(ctx.guild.roles, name="Muted")
+            if role == None:
+                role = await ctx.guild.create_role(name="Muted")
+                for channel in ctx.guild.text_channels:
+                    await channel.set_permissions(role, send_messages=False)
+                await member.add_roles(role)
                 embed = discord.Embed(
                     title= "Mute",
                     description= f"{member.mention} has been muted by {ctx.message.author.mention} for {time}s",
