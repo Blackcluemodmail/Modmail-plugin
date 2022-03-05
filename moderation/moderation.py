@@ -481,6 +481,49 @@ class Moderation(commands.Cog):
             return
         return await channel.send(embed=embed)       
 
+    @commands.command()
+    @checks.has_permissions(PermissionLevel.MODERATOR)
+    async def tempmute(self, ctx, member:discord.Member, *, time:TimeConverter = None):
+        """Mutes a member for the specified time- time in 2d 10h 3m 2s format ex:
+        &mute @Someone 1d"""
+        print(1)
+        if time == None:
+            embed = discord.Embed(
+                title= "Error",
+                description= "Please specify a time",
+                color= 0xFF0000
+            )
+            await ctx.send(embed=embed)
+            print(2)
+        if member == None:
+            embed = discord.Embed(
+                title= "Error",
+                description= "Please specify a member to mute",
+                color= 0xFF0000
+            )
+            await ctx.send(embed=embed)
+            print(3)
+        else:
+            await member.add_roles(role)
+                embed = discord.Embed(
+                    title= "Mute",
+                    description= f"{member.mention} has been muted by {ctx.message.author.mention} for {time}s",
+                    color=0x00FF00
+                )
+                await ctx.send(embed=embed)
+                print(4)
+                embed = discord.Embed(
+                    title= "Muted",
+                    description= f"You have been muted in {ctx.guiild.name} by {ctx.author.mention} for {time}",
+                    color=0x06c9ff
+                )
+                await member.send(embed=embed)
+                print(5)
+            if time:
+                await asyncio.sleep(time)
+                await member.remove_roles(role)
+                print(6)
+
 
 def setup(bot):
     bot.add_cog(Moderation(bot))
