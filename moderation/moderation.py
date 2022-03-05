@@ -278,10 +278,10 @@ class Moderation(commands.Cog):
             ).set_footer(text=f"This is the {case} case.")
         )
 
-    @commands.command(usage="<member> [reason]")
+    @commands.command(usage="<member> <duration> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
     async def mute(self, ctx, member: discord.Member = None, time:TimeConverter = None, *, reason=None):
-        """Mutes the specified member."""
+        """Mutes the specified member, format should be in 1d, 10m, 10s."""
         if member == None:
             return await ctx.send_help(ctx.command)
         role = await self.db.find_one({"_id": "muterole"})
@@ -353,6 +353,17 @@ class Moderation(commands.Cog):
             await asyncio.sleep(time)
             await member.remove_roles(role)
             print(6)
+
+        case = await self.get_case()
+
+        await self.log(
+            guild=ctx.guild,
+            embed=discord.Embed(
+                title="Mute",
+                description=f"{member} has been unmuted by automatically after {time}s. 
+                color=self.bot.main_color,
+            ).set_footer(text=f"This is the {case} case."),
+        )
 
     @commands.command(usage="<member> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
