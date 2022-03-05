@@ -360,7 +360,7 @@ class Moderation(commands.Cog):
             guild=ctx.guild,
             embed=discord.Embed(
                 title="Mute",
-                description=f"{member} has been unmuted by automatically after {time}s. 
+                description=f"{member} has been unmuted automatically after {time}s."
                 color=self.bot.main_color,
             ).set_footer(text=f"This is the {case} case."),
         )
