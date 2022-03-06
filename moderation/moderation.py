@@ -367,7 +367,7 @@ class Moderation(commands.Cog):
         )
 
        msg = f"You have been unmuted from {ctx.guild.name} after {time}s" + (
-            f" with mute cause: `{reason}`" if reason else "."
+            f" with mute cause: {reason}" if reason else "."
         )
 
        await member.send(msg)
