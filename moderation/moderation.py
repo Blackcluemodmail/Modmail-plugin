@@ -366,7 +366,7 @@ class Moderation(commands.Cog):
             embed=discord.Embed(
                 title="Unmute",
                 description=f"**Offender:** {member} \n**Responsible moderator:** {ctx.author.mention} "
-                + (f" \n**Reason:** Automatic unmute from mute made {time}seconds ago by {ctx.author.mention}"),
+                + (f" \n**Reason:** Automatic unmute from mute made {time}seconds ago"),
                 color=discord.Color.green(),
             ).set_footer(text=f"This is the {case} case."),
         )
@@ -418,10 +418,10 @@ class Moderation(commands.Cog):
         await self.log(
             guild=ctx.guild,
             embed=discord.Embed(
-                title="Mute",
-                description=f"{member} has been unmuted by {ctx.author.mention}"
-                + (f" for: {reason}" if reason else "."),
-                color=self.bot.main_color,
+                title="Unmute",
+                description=f"**Offender:** {member} \n**Responsible Moderator:** {ctx.author.mention}"
+                + (f" **Reason:** {reason}" if reason else "**Reason:** No reason given"),
+                color=discord.Color.green(),
             ).set_footer(text=f"This is the {case} case."),
         )
 
