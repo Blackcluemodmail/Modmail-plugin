@@ -349,19 +349,15 @@ class Moderation(commands.Cog):
             ).set_footer(text=f"This is the {case} case.")
         )
  
-        if time:
-            await asyncio.sleep(time)
-            await member.remove_roles(role)
-            print(6)
-
         msg = f"You have been unmuted from {ctx.guild.name} after {time}s" + (
             f" with mute cause: {reason}" if reason else "."
         )
 
-       try:
-           await member.send(msg)
-       except discord.errors.Forbidden:
-           pass
+        if time:
+            await asyncio.sleep(time)
+            await member.remove_roles(role)
+            await member.send(msg)
+            print(6)
 
         case = await self.get_case()
 
