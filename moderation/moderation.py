@@ -309,7 +309,7 @@ class Moderation(commands.Cog):
                 )
             )
 
-        msg = f"You have been muted from {ctx.guild.name} for {time}seconds" + (
+        msg = f"You have been muted from **{ctx.guild.name}** for **{time}seconds**" + (
             f" due to: {reason}" if reason else "."
         )
 
@@ -334,9 +334,9 @@ class Moderation(commands.Cog):
         await self.log(
             guild=ctx.guild,
             embed=discord.Embed(
-                title="Mute || {case} case",
-                description=f"Offender: {member} \nResponsible moderator: {ctx.author.mention} \nDuration: {time}seconds"
-                + (f" \nReason: {reason}" if reason else "\nReason: No reason given."),
+                title="Mute case",
+                description=f"**Offender**: {member} \n**Responsible moderator**: {ctx.author.mention} \n**Duration**: {time}seconds"
+                + (f" \n**Reason**: {reason}" if reason else "\n**Reason**: No reason given."),
                 color=discord.Color.red(),
             ).set_footer(text=f"This is the {case} case."),
         )
