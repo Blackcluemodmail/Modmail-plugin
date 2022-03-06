@@ -143,17 +143,17 @@ class Moderation(commands.Cog):
 
         case = await self.get_case()
 
-        msg = f"You have been warned in {ctx.guild.name}" + (
-            f" for: {reason}" if reason else "."
+        msg = f"You have been warned in **{ctx.guild.name}**" + (
+            f" for: `{reason}`" if reason else "."
         )
 
         await self.log(
             guild=ctx.guild,
             embed=discord.Embed(
                 title="Warn",
-                description=f"{member} has been warned by {ctx.author.mention}"
-                + (f" for: {reason}" if reason else "."),
-                color=self.bot.main_color,
+                description=f"**Offender:** {member} \n**Responsible moderator:** {ctx.author.mention}"
+                + (f" \n**Reason:** {reason}" if reason else "\n**Reason:** No reason given"),
+                color=discord.Color.from_rgb(255,69,0),
             ).set_footer(text=f"This is the {case} case."),
         )
 
@@ -164,7 +164,7 @@ class Moderation(commands.Cog):
                 embed=discord.Embed(
                     title="Logged",
                     description=f"Warning has been logged for {member}. I couldn't warn them, they disabled DMs.",
-                    color=self.bot.main_color,
+                    color=discord.Color.green(),
                 ).set_footer(text=f"This is the {case} case.")
             )
 
@@ -172,7 +172,7 @@ class Moderation(commands.Cog):
             embed=discord.Embed(
                 title="Success",
                 description=f"{member} has been warned.",
-                color=self.bot.main_color,
+                color=discord.Color.green(),
             ).set_footer(text=f"This is the {case} case.")
         )
 
@@ -420,7 +420,7 @@ class Moderation(commands.Cog):
             embed=discord.Embed(
                 title="Unmute",
                 description=f"**Offender:** {member} \n**Responsible Moderator:** {ctx.author.mention}"
-                + (f" **Reason:** {reason}" if reason else "**Reason:** No reason given"),
+                + (f" \n**Reason:** {reason}" if reason else "\n**Reason:** No reason given"),
                 color=discord.Color.green(),
             ).set_footer(text=f"This is the {case} case."),
         )
@@ -429,7 +429,7 @@ class Moderation(commands.Cog):
             embed=discord.Embed(
                 title="Success",
                 description=f"{member} has been unmuted.",
-                color=self.bot.main_color,
+                color=discord.Color.green(),
             ).set_footer(text=f"This is the {case} case.")
         )            
 
