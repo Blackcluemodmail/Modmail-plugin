@@ -354,7 +354,7 @@ class Moderation(commands.Cog):
             await member.remove_roles(role)
             print(6)
 
-       mmsg = f"You have been unmuted from {ctx.guild.name} after {time}s" + (
+       msg = f"You have been unmuted from {ctx.guild.name} after {time}s" + (
             f" with mute cause: `{reason}`" if reason else "."
         )
 
