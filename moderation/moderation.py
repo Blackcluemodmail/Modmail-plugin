@@ -366,7 +366,7 @@ class Moderation(commands.Cog):
             embed=discord.Embed(
                 title="Unmute",
                 description=f"**Offender:** {member} \n**Responsible moderator:** {ctx.author.mention} "
-                + (f" \n**Reason:** Automatic unmute from mute made {time}seconds ago by {ctx.author.mention}",
+                + (f" \n**Reason:** Automatic unmute from mute made {time}seconds ago by {ctx.author.mention})",
                 color=discord.Color.green(),
             ).set_footer(text=f"This is the {case} case."),
         )
