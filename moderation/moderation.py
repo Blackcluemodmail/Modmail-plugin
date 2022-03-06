@@ -375,6 +375,17 @@ class Moderation(commands.Cog):
         except discord.errors.Forbidden:
             pass
 
+        try:
+            await member.remove_roles(role, reason=reason)
+        except discord.errors.Forbidden:
+            return await ctx.send(
+                embed=discord.Embed(
+                    title="Error",
+                    description="I don't have enough permissions to unmute them.",
+                    color=discord.Color.red(),
+                ).set_footer(text="Please fix the permissions.")
+            )
+
     @commands.command(usage="<member> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
     async def unmute(self, ctx, member: discord.Member = None, *, reason=None):
