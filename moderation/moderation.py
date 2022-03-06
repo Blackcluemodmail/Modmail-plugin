@@ -163,15 +163,17 @@ class Moderation(commands.Cog):
             return await ctx.send(
                 embed=discord.Embed(
                     title="Logged",
-                    description=f"Warning has been logged for {member}. I couldn't warn them, they disabled DMs.",
+                    description=f"Warning has been logged for {member}. I couldn't warn them, they disabled DMs."
+                + (f" \n**Reason:** {reason}" if reason else "\n**Reason:** No reason given"),
                     color=discord.Color.green(),
                 ).set_footer(text=f"This is the {case} case.")
             )
 
         await ctx.send(
             embed=discord.Embed(
-                title="Success",
-                description=f"{member} has been warned.",
+                title="Warn",
+                description=f"{member} has been warned."
+                + (f" \n**Reason:** {reason}" if reason else "\n**Reason:** No reason given"),
                 color=discord.Color.green(),
             ).set_footer(text=f"This is the {case} case.")
         )
