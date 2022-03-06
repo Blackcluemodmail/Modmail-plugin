@@ -28,6 +28,8 @@ class MuteCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+class datetime.datetime(year, month, day, hour=0, minute=0, second=0, microsecond=0, tzinfo=None, *, fold=0)
+
 class Moderation(commands.Cog):
     """
     Commands to moderate your server.*
@@ -335,10 +337,10 @@ class Moderation(commands.Cog):
             guild=ctx.guild,
             embed=discord.Embed(
                 title="Mute case",
-                description=f"**Offender**: {member} @{member} \n**Duration**: {time}seconds \n**Responsible moderator**: {ctx.author.mention} "
+                description=f"**Offender**: {member} \n**Duration**: {time}seconds \n**Responsible moderator**: {ctx.author.mention} "
                 + (f" \n**Reason**: {reason}" if reason else "\n**Reason**: No reason given."),
                 color=discord.Color.red(),
-            ).set_footer(text=f"This is the {case} case."),
+            ).set_footer(text=f"This is the {case} case. datetime.fromtimestamp(time.time())"),
         )
 
         await ctx.send(
