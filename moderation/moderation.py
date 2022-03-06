@@ -366,6 +366,10 @@ class Moderation(commands.Cog):
             ).set_footer(text=f"This is the {case} case."),
         )
 
+        msg = f"You have been muted from {ctx.guild.name} for {time}s" + (
+            f" due to: {reason}" if reason else "."
+        )
+
     @commands.command(usage="<member> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
     async def unmute(self, ctx, member: discord.Member = None, *, reason=None):
