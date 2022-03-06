@@ -295,7 +295,7 @@ class Moderation(commands.Cog):
 
         if reason != None:
             if not reason.endswith("."):
-                reason = reason + "."
+                reason = reason
 
         if no_role:
             return await ctx.send(
@@ -335,7 +335,7 @@ class Moderation(commands.Cog):
             guild=ctx.guild,
             embed=discord.Embed(
                 title="Mute case",
-                description=f"**Offender**: {member} \n**Responsible moderator**: {ctx.author.mention} \n**Duration**: {time}seconds"
+                description=f"**Offender**: {member} \n**Duration**: {time}seconds \n**Responsible moderator**: {ctx.author.mention} "
                 + (f" \n**Reason**: {reason}" if reason else "\n**Reason**: No reason given."),
                 color=discord.Color.red(),
             ).set_footer(text=f"This is the {case} case."),
