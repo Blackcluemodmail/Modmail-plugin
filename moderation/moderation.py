@@ -354,19 +354,7 @@ class Moderation(commands.Cog):
             await member.remove_roles(role)
             print(6)
 
-        case = await self.get_case()
-
-        await self.log(
-            guild=ctx.guild,
-            embed=discord.Embed(
-                title="Mute",
-                description=f"{member} has been unmuted automatically after {time}s."
-                + (f" with mute cause: {reason}" if reason else "."),
-                color=self.bot.main_color,
-            ).set_footer(text=f"This is the {case} case."),
-        )
-
-        mmsg = f"You have been unmuted from {ctx.guild.name} after {time}s" + (
+       mmsg = f"You have been unmuted from {ctx.guild.name} after {time}s" + (
             f" with mute cause: `{reason}`" if reason else "."
         )
 
@@ -385,6 +373,18 @@ class Moderation(commands.Cog):
                     color=discord.Color.red(),
                 ).set_footer(text="Please fix the permissions.")
             )
+
+        case = await self.get_case()
+
+        await self.log(
+            guild=ctx.guild,
+            embed=discord.Embed(
+                title="Mute",
+                description=f"{member} has been unmuted automatically after {time}s."
+                + (f" with mute cause: {reason}" if reason else "."),
+                color=self.bot.main_color,
+            ).set_footer(text=f"This is the {case} case."),
+        )
 
     @commands.command(usage="<member> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
