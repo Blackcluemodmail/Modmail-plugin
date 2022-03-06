@@ -334,10 +334,10 @@ class Moderation(commands.Cog):
         await self.log(
             guild=ctx.guild,
             embed=discord.Embed(
-                title="Mute",
-                description=f"{member} has been muted by {ctx.author.mention} for {time}seconds"
-                + (f" due to: {reason}" if reason else "."),
-                color=self.bot.main_color,
+                title="Mute || case {case}",
+                description=f"Offender: {member} n/Responsible moderator: {ctx.author.mention} n/Duration: {time}seconds"
+                + (f" n/Reason: {reason}" if reason else "."),
+                color=discord.Color.red(),
             ).set_footer(text=f"This is the {case} case."),
         )
 
@@ -345,7 +345,7 @@ class Moderation(commands.Cog):
             embed=discord.Embed(
                 title="Success",
                 description=f"{member} has been muted for {time}seconds.",
-                color=self.bot.main_color,
+                color=discord.Color.red(),
             ).set_footer(text=f"This is the {case} case.")
         )
  
@@ -367,7 +367,7 @@ class Moderation(commands.Cog):
                 title="Unmute",
                 description=f"{member} has been unmuted automatically after {time}s."
                 + (f" with mute cause: {reason}" if reason else "."),
-                color=self.bot.main_color,
+                color=discord.Color.green(),
             ).set_footer(text=f"This is the {case} case."),
         )
 
