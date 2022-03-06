@@ -370,7 +370,7 @@ class Moderation(commands.Cog):
             f" with mute cause: {reason}" if reason else "."
         )
 
-       await member.send(msg)
+           await member.send(msg)
        except discord.errors.Forbidden:
            pass
 
