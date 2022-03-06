@@ -366,12 +366,12 @@ class Moderation(commands.Cog):
             ).set_footer(text=f"This is the {case} case."),
         )
 
-        msg = f"You have been unmuted from {ctx.guild.name} after {time}s" + (
+        mmsg = f"You have been unmuted from {ctx.guild.name} after {time}s" + (
             f" with mute cause: `{reason}`" if reason else "."
         )
 
          try:
-            await member.send(msg)
+            await member.send(mmsg)
         except discord.errors.Forbidden:
             pass
 
