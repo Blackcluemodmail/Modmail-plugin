@@ -336,7 +336,7 @@ class Moderation(commands.Cog):
             embed=discord.Embed(
                 title="Mute || {case} case",
                 description=f"Offender: {member} \nResponsible moderator: {ctx.author.mention} \nDuration: {time}seconds"
-                + (f" \nReason: {reason}" if reason else "No reason given."),
+                + (f" \nReason: {reason}" if reason else "\nReason: No reason given."),
                 color=discord.Color.red(),
             ).set_footer(text=f"This is the {case} case."),
         )
