@@ -334,9 +334,9 @@ class Moderation(commands.Cog):
         await self.log(
             guild=ctx.guild,
             embed=discord.Embed(
-                title="Mute || case {case}",
-                description=f"Offender: {member} n/Responsible moderator: {ctx.author.mention} n/Duration: {time}seconds"
-                + (f" n/Reason: {reason}" if reason else "."),
+                title="Mute || {case} case",
+                description=f"Offender: {member} /nResponsible moderator: {ctx.author.mention} /nDuration: {time}seconds"
+                + (f" /nReason: {reason}" if reason else "."),
                 color=discord.Color.red(),
             ).set_footer(text=f"This is the {case} case."),
         )
