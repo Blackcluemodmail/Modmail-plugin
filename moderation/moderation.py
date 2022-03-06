@@ -358,21 +358,9 @@ class Moderation(commands.Cog):
             f" with mute cause: `{reason}`" if reason else "."
         )
 
-         try:
-            await member.send(mmsg)
-        except discord.errors.Forbidden:
-            pass
-
-        try:
-            await member.remove_roles(role, reason=reason)
-        except discord.errors.Forbidden:
-            return await ctx.send(
-                embed=discord.Embed(
-                    title="Error",
-                    description="I don't have enough permissions to unmute them.",
-                    color=discord.Color.red(),
-                ).set_footer(text="Please fix the permissions.")
-            )
+       await member.send(mmsg)
+       except discord.errors.Forbidden:
+           pass
 
         case = await self.get_case()
 
