@@ -6,7 +6,6 @@ from core.models import PermissionLevel
 import traceback
 import sys
 import re
-from datetime import datetime
 
 time_regex = re.compile("(?:(\d{1,5})(h|s|m|d))+?")
 time_dict = {"h":3600, "s":1, "m":60, "d":86400}
@@ -28,8 +27,6 @@ class TimeConverter(commands.Converter):
 class MuteCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-
-class datetime.datetime(year, month, day, hour=0, minute=0, second=0, microsecond=0, tzinfo=None, *, fold=0)
 
 class Moderation(commands.Cog):
     """
@@ -338,10 +335,10 @@ class Moderation(commands.Cog):
             guild=ctx.guild,
             embed=discord.Embed(
                 title="Mute case",
-                description=f"**Offender**: {member} \n**Duration**: {time}seconds \n**Responsible moderator**: {ctx.author.mention} "
-                + (f" \n**Reason**: {reason}" if reason else "\n**Reason**: No reason given."),
-                color=discord.Color.red(),
-            ).set_footer(text=f"This is the {case} case. datetime.fromtimestamp(time.time())"),
+                description=f"**Offender:** {member} \n**Duration:** {time}seconds \n**Responsible moderator:** {ctx.author.mention} "
+                + (f" \n**Reason:** {reason}" if reason else "\n**Reason:** No reason given."),
+                color=discord.Color.Orange(),
+            ).set_footer(text=f"This is the {case} case."),
         )
 
         await ctx.send(
@@ -368,8 +365,8 @@ class Moderation(commands.Cog):
             guild=ctx.guild,
             embed=discord.Embed(
                 title="Unmute",
-                description=f"{member} has been unmuted automatically after {time}s."
-                + (f" with mute cause: {reason}" if reason else "."),
+                description=f"**Offender:** {member} \n**Responsible moderator:** {ctx.author.mention} "
+                + (f" \n**Reason:** Automatic unmute from mute made {time}seconds ago by {ctx.author.mention}",
                 color=discord.Color.green(),
             ).set_footer(text=f"This is the {case} case."),
         )
