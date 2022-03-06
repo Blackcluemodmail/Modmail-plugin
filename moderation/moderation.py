@@ -309,7 +309,7 @@ class Moderation(commands.Cog):
                 )
             )
 
-        msg = f"You have been muted from {ctx.guild.name} for {time}s" + (
+        msg = f"You have been muted from {ctx.guild.name} for {time}seconds" + (
             f" due to: {reason}" if reason else "."
         )
 
@@ -335,7 +335,7 @@ class Moderation(commands.Cog):
             guild=ctx.guild,
             embed=discord.Embed(
                 title="Mute",
-                description=f"{member} has been muted by {ctx.author.mention} for {time}s"
+                description=f"{member} has been muted by {ctx.author.mention} for {time}seconds"
                 + (f" due to: {reason}" if reason else "."),
                 color=self.bot.main_color,
             ).set_footer(text=f"This is the {case} case."),
@@ -344,12 +344,12 @@ class Moderation(commands.Cog):
         await ctx.send(
             embed=discord.Embed(
                 title="Success",
-                description=f"{member} has been muted for {time}s.",
+                description=f"{member} has been muted for {time}seconds.",
                 color=self.bot.main_color,
             ).set_footer(text=f"This is the {case} case.")
         )
  
-        msg = f"You have been unmuted from {ctx.guild.name} after {time}s" + (
+        msg = f"You have been unmuted from {ctx.guild.name} after {time}seconds" + (
             f" with mute cause: {reason}" if reason else "."
         )
 
@@ -364,7 +364,7 @@ class Moderation(commands.Cog):
         await self.log(
             guild=ctx.guild,
             embed=discord.Embed(
-                title="Mute",
+                title="Unmute",
                 description=f"{member} has been unmuted automatically after {time}s."
                 + (f" with mute cause: {reason}" if reason else "."),
                 color=self.bot.main_color,
