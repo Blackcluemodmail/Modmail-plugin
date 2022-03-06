@@ -337,7 +337,7 @@ class Moderation(commands.Cog):
                 title="Mute case",
                 description=f"**Offender:** {member} \n**Duration:** {time}seconds \n**Responsible moderator:** {ctx.author.mention} "
                 + (f" \n**Reason:** {reason}" if reason else "\n**Reason:** No reason given."),
-                color=discord.Color.Orange(),
+                color=discord.Color.from_rgb(0xe67e22),
             ).set_footer(text=f"This is the {case} case."),
         )
 
