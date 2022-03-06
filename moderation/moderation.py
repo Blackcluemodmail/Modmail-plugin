@@ -354,14 +354,6 @@ class Moderation(commands.Cog):
             await member.remove_roles(role)
             print(6)
 
-       msg = f"You have been unmuted from {ctx.guild.name} after {time}s" + (
-            f" with mute cause: `{reason}`" if reason else "."
-        )
-
-       await member.send(mmsg)
-       except discord.errors.Forbidden:
-           pass
-
         case = await self.get_case()
 
         await self.log(
@@ -373,6 +365,14 @@ class Moderation(commands.Cog):
                 color=self.bot.main_color,
             ).set_footer(text=f"This is the {case} case."),
         )
+
+       msg = f"You have been unmuted from {ctx.guild.name} after {time}s" + (
+            f" with mute cause: `{reason}`" if reason else "."
+        )
+
+       await member.send(msg)
+       except discord.errors.Forbidden:
+           pass
 
     @commands.command(usage="<member> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
