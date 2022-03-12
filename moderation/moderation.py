@@ -282,7 +282,7 @@ class Moderation(commands.Cog):
 
     @commands.command(usage="<member> <duration> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
-    async def mute(self, ctx, member: discord.Member = None, time=TimeConverter = None, *, reason=None):
+    async def mute(self, ctx, member: discord.Member = None, time:TimeConverter = None, *, reason=None):
         """Mutes the specified member, format should be in 1d, 10m, 10s."""
         if member == None:
             return await ctx.send_help(ctx.command)
