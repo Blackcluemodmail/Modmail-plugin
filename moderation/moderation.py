@@ -166,7 +166,7 @@ class Moderation(commands.Cog):
                     description=f"Warning has been logged for {member}. I couldn't warn them, they disabled DMs."
                 + (f" \n**Reason:** {reason}" if reason else "\n**Reason:** No reason given"),
                     color=discord.Color.green(),
-                ).set_footer(text=f"This is the {case} case.")
+                ).set_footer(text=f"This is the {case} case."), delete_after=10
             )
 
         await ctx.message.delete() 
@@ -176,7 +176,7 @@ class Moderation(commands.Cog):
                 description=f"{member} has been warned."
                 + (f" \n**Reason:** {reason}" if reason else "\n**Reason:** No reason given"),
                 color=discord.Color.green(),
-            ).set_footer(text=f"This is the {case} case."), delete_after=5
+            ).set_footer(text=f"This is the {case} case."), delete_after=10
         )
 
     @commands.command(usage="<member> [reason]")
@@ -329,7 +329,7 @@ class Moderation(commands.Cog):
                     title="Error",
                     description="I don't have enough permissions to mute them.",
                     color=discord.Color.red(),
-                ).set_footer(text="Please fix the permissions.")
+                ).set_footer(text="Please fix the permissions."), delete_after=10
             )
 
         case = await self.get_case()
@@ -349,7 +349,7 @@ class Moderation(commands.Cog):
                 title="Success",
                 description=f"{member} has been muted for {time}seconds.",
                 color=discord.Color.blue(),
-            ).set_footer(text=f"This is the {case} case.")
+            ).set_footer(text=f"This is the {case} case."), delete_after=10
         )
  
         msg = f"You have been unmuted from {ctx.guild.name} after {time}seconds" + (
@@ -413,7 +413,7 @@ class Moderation(commands.Cog):
                     title="Error",
                     description="I don't have enough permissions to unmute them.",
                     color=discord.Color.red(),
-                ).set_footer(text="Please fix the permissions.")
+                ).set_footer(text="Please fix the permissions."), delete_after=10
             )
 
         case = await self.get_case()
@@ -433,7 +433,7 @@ class Moderation(commands.Cog):
                 title="Success",
                 description=f"{member} has been unmuted.",
                 color=discord.Color.green(),
-            ).set_footer(text=f"This is the {case} case.")
+            ).set_footer(text=f"This is the {case} case."), delete_after=10
         )            
 
     @commands.command(usage="<amount>")
