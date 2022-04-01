@@ -405,6 +405,15 @@ class Moderation(commands.Cog):
                 )
             )
 
+        msg = f"You have been unmuted from **{ctx.guild.name}** + (
+            f" due to: {reason}" if reason else "."
+        )
+
+        try:
+            await member.send(msg)
+        except discord.errors.Forbidden:
+            pass
+
         try:
             await member.remove_roles(role, reason=reason)
         except discord.errors.Forbidden:
