@@ -8,7 +8,7 @@ import sys
 import re
 
 time_regex = re.compile("(?:(\d{1,5})(h|s|m|d))+?")
-time_dict = {"h":3600, "s":1, "m":60, "d":86400}
+time_dict = {"h":60, "s":1, "m":60, "d":24}
 
 class TimeConverter(commands.Converter):
     async def convert(self, ctx, argument):
