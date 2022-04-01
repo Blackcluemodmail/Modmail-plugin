@@ -169,6 +169,7 @@ class Moderation(commands.Cog):
                 ).set_footer(text=f"This is the {case} case.")
             )
 
+        await ctx.message.delete() 
         await ctx.send(
             embed=discord.Embed(
                 title="Warn",
