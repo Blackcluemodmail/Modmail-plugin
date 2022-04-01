@@ -176,7 +176,7 @@ class Moderation(commands.Cog):
                 description=f"{member} has been warned."
                 + (f" \n**Reason:** {reason}" if reason else "\n**Reason:** No reason given"),
                 color=discord.Color.green(),
-            ).set_footer(text=f"This is the {case} case.")
+            ).set_footer(text=f"This is the {case} case."), delete_after=5
         )
 
     @commands.command(usage="<member> [reason]")
