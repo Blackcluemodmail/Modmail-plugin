@@ -405,8 +405,8 @@ class Moderation(commands.Cog):
                 )
             )
 
-        msg = f"You have been unmuted from **{ctx.guild.name}** + (
-            f" due to: {reason}" if reason else "."
+        msg = f"You have been unmuted from **{ctx.guild.name}**" + (
+            f"\n**Reason**: *{reason}*" if reason else "*No reason was given"
         )
 
         try:
