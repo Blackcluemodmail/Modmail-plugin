@@ -281,6 +281,57 @@ class Moderation(commands.Cog):
             ).set_footer(text=f"This is the {case} case.")
         )
 
+    @commands.command(usage="<member> [reason]")
+    @checks.has_permissions(PermissionLevel.MODERATOR)
+    async def unban(self, ctx, member: discord.Member = None, *, reason=None):
+        """Bans the specified member."""
+        if member == None:
+            return await ctx.send_help(ctx.command)
+
+        if reason != None:
+            if not reason.endswith("."):
+                reason = reason + "."
+
+        msg = f"You have been unbanned from {ctx.guild.name}" + (
+            f" for: {reason}" if reason else "."
+        )
+
+        try:
+            await member.send(msg)
+        except discord.errors.Forbidden:
+            pass
+
+        try:
+            await unban(user, *, reason=None)
+        except discord.errors.Forbidden:
+            return await ctx.send(
+                embed=discord.Embed(
+                    title="Error",
+                    description="I don't have enough permissions to unban them.",
+                    color=discord.Color.red(),
+                ).set_footer(text="Please fix the permissions.")
+            )
+
+        case = await self.get_case()
+
+        await self.log(
+            guild=ctx.guild,
+            embed=discord.Embed(
+                title="Unban",
+                description=f"{member} has been banned by {ctx.author.mention}"
+                + (f" for: {reason}" if reason else "."),
+                color=self.bot.main_color,
+            ).set_footer(text=f"This is the {case} case."),
+        )
+
+        await ctx.send(
+            embed=discord.Embed(
+                title="Success",
+                description=f"{member} has been banned.",
+                color=self.bot.main_color,
+            ).set_footer(text=f"This is the {case} case.")
+        )
+
     @commands.command(usage="<member> <duration> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
     async def mute(self, ctx, member: discord.Member = None, time:TimeConverter = None, *, reason=None):
