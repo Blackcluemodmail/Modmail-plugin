@@ -302,7 +302,7 @@ class Moderation(commands.Cog):
             pass
 
         try:
-            await unban(user, *, reason=None)
+            await member.unban(user, *, reason=None)
         except discord.errors.Forbidden:
             return await ctx.send(
                 embed=discord.Embed(
