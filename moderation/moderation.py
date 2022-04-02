@@ -453,6 +453,7 @@ class Moderation(commands.Cog):
         if member == None:
             return await ctx.send_help(ctx.command)
         try:
+            await ctx.message.delete()
             await member.edit(nick=nick)
         except discord.errors.Forbidden:
             return await ctx.send(
@@ -477,7 +478,7 @@ class Moderation(commands.Cog):
         await ctx.send(
             embed=discord.Embed(
                 title="**Success**",
-                description=f"Successfully changed {member.mention}'s nickname.\nNew **Nickname:** *{nick}*",
+                description=f"Successfully changed {member.mention}'s nickname.\n**New Nickname:** {nick}",
                 color=discord.Color.green(),
             ).set_footer(text=f"This is the {case} case."), delete_after=10
         )            
