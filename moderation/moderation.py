@@ -477,7 +477,7 @@ class Moderation(commands.Cog):
         await ctx.send(
             embed=discord.Embed(
                 title="**Success**",
-                description=f"Successfully changed {member}'s nickname.",
+                description=f"Successfully changed {member.mention}'s nickname to {nick}.",
                 color=discord.Color.green(),
             ).set_footer(text=f"This is the {case} case."), delete_after=10
         )            
