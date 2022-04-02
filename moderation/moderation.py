@@ -448,7 +448,7 @@ class Moderation(commands.Cog):
 
     @commands.command(usage="<member> [nickname]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
-    async def nick(self, ctx, member: discord.Member = None, *, nick)
+    async def nick(self, ctx, member: discord.Member = None, *, nick):
         """Change the nickname of specified user."""
         if member == None:
             return await ctx.send_help(ctx.command)
