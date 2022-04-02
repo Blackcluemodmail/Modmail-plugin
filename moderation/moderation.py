@@ -292,7 +292,7 @@ class Moderation(commands.Cog):
     @checks.has_permissions(PermissionLevel.MODERATOR)
     async def unban(self, ctx, user: discord.User = None, *, reason=None):
         """Unbans the specified member."""
-        if member == None:
+        if user == None:
             return await ctx.send_help(ctx.command)
         guild = ctx.guild
 
@@ -305,7 +305,7 @@ class Moderation(commands.Cog):
         )
 
         try:
-            await member.send(msg)
+            await user.send(msg)
         except discord.errors.Forbidden:
             return await ctx.send(
                 embed=discord.Embed(
@@ -333,7 +333,7 @@ class Moderation(commands.Cog):
             guild=ctx.guild,
             embed=discord.Embed(
                 title="Unban",
-                description=f"{member} has been unbanned by {ctx.author.mention}"
+                description=f"{user} has been unbanned by {ctx.author.mention}"
                 + (f" for: {reason}" if reason else "."),
                 color=self.bot.main_color,
             ).set_footer(text=f"This is the {case} case."),
@@ -342,7 +342,7 @@ class Moderation(commands.Cog):
         await ctx.send(
             embed=discord.Embed(
                 title="Success",
-                description=f"{member} has been unbanned.",
+                description=f"{user} has been unbanned.",
                 color=self.bot.main_color,
             ).set_footer(text=f"This is the {case} case.")
         )
