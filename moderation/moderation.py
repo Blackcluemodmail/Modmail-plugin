@@ -290,7 +290,7 @@ class Moderation(commands.Cog):
 
     @commands.command(usage="<member> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
-    async def unban(self, ctx, member: discord.Member = None, *, reason=None):
+    async def unban(self, ctx, user: discord.User = None, *, reason=None):
         """Unbans the specified member."""
         if member == None:
             return await ctx.send_help(ctx.command)
@@ -317,7 +317,7 @@ class Moderation(commands.Cog):
             )
 
         try:
-            await guild.unban(member=member, reason=reason)
+            await guild.unban(user=user, reason=reason)
         except discord.errors.Forbidden:
             return await ctx.send(
                 embed=discord.Embed(
