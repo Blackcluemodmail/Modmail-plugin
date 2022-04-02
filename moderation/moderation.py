@@ -310,7 +310,7 @@ class Moderation(commands.Cog):
             return await ctx.send(
                 embed=discord.Embed(
                     title="Logged",
-                    description=f"User {member} has been unbanned. I couldn't DM them, they disabled DMs."
+                    description=f"User {user} has been unbanned. I couldn't DM them, they disabled DMs."
                 + (f" \n**Reason:** {reason}" if reason else "\n**Reason:** No reason given"),
                     color=discord.Color.green(),
                 ).set_footer(text=f"This is the {case} case."), delete_after=10
