@@ -446,6 +446,42 @@ class Moderation(commands.Cog):
             ).set_footer(text=f"This is the {case} case."), delete_after=10
         )            
 
+    @commands.command(usage="<member> [nickname]")
+    @checks.has_permissions(PermissionLevel.MODERATOR)
+    async def nick(self, ctx, member: discord.Member = None, *, nick)
+        """Change the nickname of specified user."""
+        if member == None:
+            return await ctx.send_help(ctx.command)
+        try:
+             await member.edit(nick=nick)
+         except discord.errors.Forbidden:
+             return await ctx.send(
+                 embed=discord.Embed(
+                     title="Error",
+                     description="I don't have enough permissions to change their nickname.",
+                     color=discord.Color.red(),
+                 ).set_footer(text="Please fix the permissions."), delete_after=10
+             )
+
+        case = await self.get_case()
+
+        await self.log(
+            guild=ctx.guild,
+            embed=discord.Embed(
+                title="Nickname Changed",
+                description=f"**Offender:** {member} \n**Responsible moderator:** {ctx.author.mention}"
+                color=discord.Color.green(),
+            ).set_footer(text=f"This is the {case} case."),
+        )
+
+        await ctx.send(
+            embed=discord.Embed(
+                title="**Success**",
+                description=f"Successfully changed {member}'s nickname.",
+                color=discord.Color.green(),
+            ).set_footer(text=f"This is the {case} case."), delete_after=10
+        )            
+          
     @commands.command(usage="<amount>")
     @checks.has_permissions(PermissionLevel.MODERATOR)
     async def purge(self, ctx, amount: int = 1):
