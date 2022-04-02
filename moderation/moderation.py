@@ -453,15 +453,15 @@ class Moderation(commands.Cog):
         if member == None:
             return await ctx.send_help(ctx.command)
         try:
-             await member.edit(nick=nick)
-         except discord.errors.Forbidden:
-             return await ctx.send(
-                 embed=discord.Embed(
-                     title="Error",
-                     description="I don't have enough permissions to change their nickname.",
-                     color=discord.Color.red(),
-                 ).set_footer(text="Please fix the permissions."), delete_after=10
-             )
+            await member.edit(nick=nick)
+        except discord.errors.Forbidden:
+            return await ctx.send(
+                embed=discord.Embed(
+                    title="Error",
+                    description="I don't have enough permissions to change their nickname.",
+                    color=discord.Color.red(),
+                ).set_footer(text="Please fix the permissions."), delete_after=10
+            )
 
         case = await self.get_case()
 
