@@ -469,7 +469,7 @@ class Moderation(commands.Cog):
             guild=ctx.guild,
             embed=discord.Embed(
                 title="Nickname Changed",
-                description=f"**Offender:** {member} \n**Responsible moderator:** {ctx.author.mention}.",
+                description=f"**Offender:** {member} \n**New Nickname:** {nick} \n**Responsible moderator:** {ctx.author.mention}.",
                 color=discord.Color.green(),
             ).set_footer(text=f"This is the {case} case."),
         )
@@ -477,7 +477,7 @@ class Moderation(commands.Cog):
         await ctx.send(
             embed=discord.Embed(
                 title="**Success**",
-                description=f"Successfully changed {member.mention}'s nickname to {nick}.",
+                description=f"Successfully changed {member.mention}'s nickname.\nNew **Nickname:** *{nick}*",
                 color=discord.Color.green(),
             ).set_footer(text=f"This is the {case} case."), delete_after=10
         )            
