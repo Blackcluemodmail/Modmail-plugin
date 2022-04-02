@@ -469,7 +469,7 @@ class Moderation(commands.Cog):
             guild=ctx.guild,
             embed=discord.Embed(
                 title="Nickname Changed",
-                description=f"**Offender:** {member} \n**Responsible moderator:** {ctx.author.mention}"
+                description=f"**Offender:** {member} \n**Responsible moderator:** {ctx.author.mention}.",
                 color=discord.Color.green(),
             ).set_footer(text=f"This is the {case} case."),
         )
