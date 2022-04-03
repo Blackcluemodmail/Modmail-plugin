@@ -559,6 +559,9 @@ class Moderation(commands.Cog):
             return await ctx.send(embed=embed)
         for item in match:
             seconds += int(item[:-1]) * units[item[-1]]
+        if seconds > 21600:
+            embed = discord.Embed(description="⚠ You can't slowmode a channel for longer than 6 hours!", color=0xff0000)
+            return await ctx.send(embed=embed)
         try:
             await channel.edit(slowmode_delay=seconds)
         except discord.errors.Forbidden:
