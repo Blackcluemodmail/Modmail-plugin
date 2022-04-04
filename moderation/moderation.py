@@ -136,6 +136,33 @@ class Moderation(commands.Cog):
             )
         )
 
+    @commands.command()
+    async def afk(ctx, *, reason=None):
+
+        if reason != None:
+            if not reason.endswith("."):
+                reason = reason + "."
+
+        current_nick = ctx.author
+
+        try:
+            await ctx.author.edit(nick=f"[AFK] {ctx.author.name}")
+        except discord.errors.Forbidden:
+            return await ctx.send(f"{ctx.author.mention}"
+        + (f" I have set your AFK: {reason}" if reason else "AFK"),
+
+        counter = 0
+        while counter <= int(mins):
+           counter += 1
+           await asyncio.sleep(60)
+
+           if counter == int(mins):
+
+               try:
+                  await ctx.author.edit(nick=current_nick)
+               except discord.errors.Forbidden:
+                  return await ctx.send(f"Welcome back {ctx.author.mention}, I have removed your AFK")
+            
     @commands.command(usage="<member> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
     async def warn(self, ctx, member: discord.Member = None, *, reason=None):
