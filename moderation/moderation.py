@@ -1,6 +1,7 @@
 import asyncio
 import discord
 import typing
+from datetime import datetime
 from discord.ext import commands
 from core import checks
 from core.models import PermissionLevel
@@ -750,10 +751,20 @@ class Moderation(commands.Cog):
         await ctx.send("Successfully created the role!")
 
     @commands.command()
-    async def afk(ctx, mins):
-        current_nick = ctx.author.nick
-        await ctx.send(f"{ctx.author.mention} has gone afk for {mins} minutes.")
-        await ctx.author.edit(nick=f"{ctx.author.name} [AFK]")
+    async def afk(ctx, *, reason=None):
+
+        if reason != None:
+            if not reason.endswith("."):
+                reason = reason + "."
+
+        current_nick = ctx.author
+        await ctx.send(f"{ctx.author.mention}"
+        + (f" I have set your AFK: {reason}" if reason else "AFK"),
+        try:
+            await ctx.author.edit(nick=f"[AFK] {ctx.author.name}")
+        except discord.errors.Forbidden:
+            return await ctx.send(f"{ctx.author.mention}"
+        + (f" I have set your AFK: {reason}" if reason else "AFK"),
 
         counter = 0
         while counter <= int(mins):
@@ -761,8 +772,10 @@ class Moderation(commands.Cog):
            await asyncio.sleep(60)
 
            if counter == int(mins):
-               await ctx.author.edit(nick=current_nick)
-               await ctx.send(f"{ctx.author.mention} is no longer AFK")
+               try:
+                  await ctx.author.edit(nick=current_nick)
+               except discord.errors.Forbidden:
+                  return await ctx.send(f"Welcome back {ctx.author.mention}, I have removed your AFK")
             
 def setup(bot):
     bot.add_cog(Moderation(bot))
