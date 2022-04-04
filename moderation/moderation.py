@@ -697,7 +697,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @checks.has_permissions(PermissionLevel.ADMINISTRATOR)
-    async def unrole(self, ctx, member:discord.Member = None, *, role: discord.Role):
+    async def unrole(self, ctx, member:discord.Member = None,*, role: discord.Role):
         """Remove a role from a member."""
         if member is None:
             member = ctx.guild.get_member(match_user_id(ctx.channel.topic))
