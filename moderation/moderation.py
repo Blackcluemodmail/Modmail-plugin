@@ -758,8 +758,6 @@ class Moderation(commands.Cog):
                 reason = reason + "."
 
         current_nick = ctx.author
-        await ctx.send(f"{ctx.author.mention}"
-        + (f" I have set your AFK: {reason}" if reason else "AFK")
 
         try:
             await ctx.author.edit(nick=f"[AFK] {ctx.author.name}")
