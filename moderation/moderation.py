@@ -760,6 +760,7 @@ class Moderation(commands.Cog):
         current_nick = ctx.author
         await ctx.send(f"{ctx.author.mention}"
         + (f" I have set your AFK: {reason}" if reason else "AFK"),
+
         try:
             await ctx.author.edit(nick=f"[AFK] {ctx.author.name}")
         except discord.errors.Forbidden:
@@ -772,6 +773,7 @@ class Moderation(commands.Cog):
            await asyncio.sleep(60)
 
            if counter == int(mins):
+
                try:
                   await ctx.author.edit(nick=current_nick)
                except discord.errors.Forbidden:
