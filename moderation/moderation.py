@@ -149,7 +149,7 @@ class Moderation(commands.Cog):
             await ctx.author.edit(nick=f"[AFK] {ctx.author.name}")
         except discord.errors.Forbidden:
             return await ctx.send(f"{ctx.author.mention}"
-        + (f" I have set your AFK: {reason}" if reason else "AFK"),
+        + (f" I have set your AFK: {reason}" if reason else "AFK")
 
           counter = 0
           while counter <= int(mins):
