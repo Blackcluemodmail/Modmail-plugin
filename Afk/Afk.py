@@ -1,74 +1,52 @@
-import discord
 import asyncio
-import re
+import discord
+import typing
+from datetime import datetime
 from discord.ext import commands
 from core import checks
-from mods.cog import Cog
+from core.models import PermissionLevel
+from core.utils import match_user_id
+from types import SimpleNamespace
+import traceback
+import sys
+import re
 
-class Afk(Cog):
-	def __init__(self, bot):
-		super().__init__(bot)
-		self.cursor = bot.mysql.cursor
-		self.afks = {}
-		self.mention_regex = re.compile(r'(<@(|!|)\d*>)')
-		self.bot.loop.create_task(self.afk_init())
+    class Moderation(commands.Cog):
+    """
+    Commands to moderate your server.*
+    NOTE: You will need the moderator permission
+    level in order to run any of these commands.*_ _
+    """
 
-	async def afk_init(self):
-		sql = 'SELECT * FROM `afk`'
-		result = self.cursor.execute(sql).fetchall()
-		if len(result) == 0:
-			return
-		for s in result:
-			self.afks[str(s['user'])] = s['reason']
+    def __init__(self, bot):
+        self.bot = bot
+        self.db = bot.api.get_plugin_partition(self)
 
-	async def remove_afk(self, user):
-		sql = 'DELETE FROM `afk` WHERE user={0}'
-		sql = sql.format(user)
-		self.cursor.execute(sql)
-		self.cursor.commit()
-		del self.afks[str(user)]
 
-	@commands.command(pass_context=True)
-	async def afk(self, ctx, *, reason:str=None):
-		if reason:
-			reason = reason.replace('@everyone', '@\u200beveryone').replace('@here', '@\u200bhere')
-		sql = 'INSERT INTO `afk` (`user`, `reason`) VALUES (%s, %s)'
-		try:
-			self.cursor.execute(sql, (ctx.message.author.id, reason))
-		except:
-			await self.remove_afk(ctx.message.author.id)
-			await self.bot.say(':no_entry: You are already afk, you have been removed.')
-		self.cursor.commit()
-		self.afks[ctx.message.author.id] = reason
-		msg = ':white_check_mark: `{0}` is now afk.'.format(ctx.message.author)
-		await self.bot.say(msg)
+    @commands.command()
+    async def afk(ctx, *, reason=None):
 
-	async def on_message(self, message):
-		if message.author == self.bot.user:
-			return
-		if message.channel.is_private:
-			return
-		sql = 'SELECT user,reason FROM `afk`'
-		result = self.cursor.execute(sql).fetchall()
-		if len(result) == 0:
-			return
-		mentions_results = self.mention_regex.findall(message.content)
-		if not mentions_results:
-			return
-		mentions = [x[0].replace('!', '') for x in mentions_results]
-		for s in result:
-			m = '<@{0}>'.format(s['user'])
-			u = message.server.get_member(str(s['user']))
-			if m in mentions and u != None and s['user'] in self.afks:
-				await self.bot.send_message(message.channel, '\n:keyboard: `{0}` is currently AFK{1}'.format(u, ':\n{0}'.format(s['reason'] if s['reason'] else '.')))
+        if reason != None:
+            if not reason.endswith("."):
+                reason = reason + "."
 
-	async def on_typing(self, channel, user, when):
-		if user.id in self.afks:
-			try:
-				await self.remove_afk(user.id)
-			except:
-				return
-			await self.bot.send_message(user, ':ok_hand: Welcome back, your AFK status has been removed{0}.'.format(' ({0})'.format(channel.mention) if not channel.is_private else ''))
+        current_nick = ctx.author
 
-def setup(bot):
-	bot.add_cog(Afk(bot))
+        try:
+            await ctx.author.edit(nick=f"[AFK] {ctx.author.name}")
+        except discord.errors.Forbidden:
+            return await ctx.send(f"{ctx.author.mention}"
+        + (f" I have set your AFK: {reason}" if reason else "AFK"),
+
+        counter = 0
+        while counter <= int(mins):
+           counter += 1
+           await asyncio.sleep(60)
+
+           if counter == int(mins):
+
+               try:
+                  await ctx.author.edit(nick=current_nick)
+               except discord.errors.Forbidden:
+                  return await ctx.send(f"Welcome back {ctx.author.mention}, I have removed your AFK")
+            
