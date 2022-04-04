@@ -658,6 +658,18 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @checks.has_permissions(PermissionLevel.ADMINISTRATOR)
+    async def unrole(self, ctx, member: discord.Member = None, *, role: discord.Role):
+        """Remove a role from a member."""
+        if member is None:
+            member = ctx.guild.get_member(match_user_id(ctx.channel.topic))
+            if member is None:
+                raise commands.MissingRequiredArgument(SimpleNamespace(name="unrole"))
+            
+        await member.remove_roles(role)
+        await ctx.send(f"Successfully removed the role from {member.name}!")
+
+    @commands.command()
+    @checks.has_permissions(PermissionLevel.ADMINISTRATOR)
     async def role(self, ctx, member: discord.Member=None, *, role: discord.Role):
         """Assign a role to a member."""
         if member is None:
@@ -693,19 +705,14 @@ class Moderation(commands.Cog):
                 description=f"Successfully changed {member.mention}'s roles. \n**New Role added:** {role}",
                 color=discord.Color.green(),
             ).set_footer(text=f"This is the {case} case."), delete_after=60
-       
-
-    @commands.command()
-    @checks.has_permissions(PermissionLevel.ADMINISTRATOR)
-    async def unrole(self, ctx, member: discord.Member = None, *, role: discord.Role):
-        """Remove a role from a member."""
-        if member is None:
-            member = ctx.guild.get_member(match_user_id(ctx.channel.topic))
-            if member is None:
-                raise commands.MissingRequiredArgument(SimpleNamespace(name="unrole"))
-            
-        await member.remove_roles(role)
-        await ctx.send(f"Successfully removed the role from {member.name}!")
+       except discord.errors.Forbidden:
+            return await ctx.send(
+                embed=discord.Embed(
+                    title="Error",
+                    description="I don't have enough permissions to change their nickname.",
+                    color=discord.Color.red(),
+                ).set_footer(text="Please fix the permissions."), delete_after=10
+            )
 
     @commands.command(aliases=["makerole"])
     @checks.has_permissions(PermissionLevel.ADMINISTRATOR)
