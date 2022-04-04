@@ -705,14 +705,7 @@ class Moderation(commands.Cog):
                 description=f"Successfully changed {member.mention}'s roles. \n**New Role added:** {role}",
                 color=discord.Color.green(),
             ).set_footer(text=f"This is the {case} case."), delete_after=60
-       except discord.errors.Forbidden:
-            return await ctx.send(
-                embed=discord.Embed(
-                    title="Error",
-                    description="I don't have enough permissions to change their nickname.",
-                    color=discord.Color.red(),
-                ).set_footer(text="Please fix the permissions."), delete_after=10
-            )
+        )
 
     @commands.command(aliases=["makerole"])
     @checks.has_permissions(PermissionLevel.ADMINISTRATOR)
