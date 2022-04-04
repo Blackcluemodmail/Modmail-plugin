@@ -658,7 +658,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @checks.has_permissions(PermissionLevel.ADMINISTRATOR)
-    async def role(self, ctx, member: discord.Member=None, role: discord.Role):
+    async def role(self, ctx, member: discord.Member=None, *, role: discord.Role):
         """Assign a role to a member."""
         if member is None:
             member = ctx.guild.get_member(match_user_id(ctx.channel.topic))
