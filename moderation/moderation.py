@@ -1,8 +1,11 @@
 import asyncio
 import discord
+import typing
 from discord.ext import commands
 from core import checks
 from core.models import PermissionLevel
+from core.utils import match_user_id
+from types import SimpleNamespace
 import traceback
 import sys
 import re
@@ -383,7 +386,7 @@ class Moderation(commands.Cog):
                     title="Error",
                     description="I don't have enough permissions to mute them.",
                     color=discord.Color.red(),
-                ).set_footer(text="Please fix the permissions."), delete_after=10
+                ).set_footer(text="Please fix the permissions."), delete_after=30
             )
 
         case = await self.get_case()
@@ -515,7 +518,7 @@ class Moderation(commands.Cog):
                     title="Error",
                     description="I don't have enough permissions to change their nickname.",
                     color=discord.Color.red(),
-                ).set_footer(text="Please fix the permissions."), delete_after=10
+                ).set_footer(text="Please fix the permissions."), delete_after=30
             )
 
         case = await self.get_case()
@@ -534,7 +537,7 @@ class Moderation(commands.Cog):
                 title="**Success**",
                 description=f"Successfully changed {member.mention}'s nickname.\n**New Nickname:** {nick}",
                 color=discord.Color.green(),
-            ).set_footer(text=f"This is the {case} case."), delete_after=10
+            ).set_footer(text=f"This is the {case} case."), delete_after=30
         )  
 
     @commands.command()
@@ -565,9 +568,9 @@ class Moderation(commands.Cog):
         try:
             await channel.edit(slowmode_delay=seconds)
         except discord.errors.Forbidden:
-            embed = discord.Embed(description="⚠ I don't have permission to do this!", color=0xff0000)
+            embed = discord.Embed(description="⚠ I don't have permission to do this!", color=0xff0000, delete_after = 30)
             return await ctx.send(embed=embed)
-        embed=discord.Embed(description=f"{ctx.author.mention} set a slowmode delay of `{time}` in {channel.mention}", color=0x06c9ff)
+        embed=discord.Embed(description=f"{ctx.author.mention} set a slowmode delay of `{time}` in {channel.mention}", color=0x06c9ff, delete_after=30)
         embed.set_author(name="Slow Mode")
         await ctx.send(embed=embed)
 
@@ -652,6 +655,71 @@ class Moderation(commands.Cog):
         if channel == None:
             return
         return await channel.send(embed=embed)               
+
+    @commands.command()
+    @checks.has_permissions(PermissionLevel.ADMINISTRATOR)
+    async def role(self, ctx, member: discord.Member=None, role: discord.Role):
+        """Assign a role to a member."""
+        if member is None:
+            member = ctx.guild.get_member(match_user_id(ctx.channel.topic))
+            if member is None:
+                raise commands.MissingRequiredArgument(SimpleNamespace(name="role"))
+       
+        await member.add_roles(role)
+        except discord.errors.Forbidden:
+            return await ctx.send(
+                embed=discord.Embed(
+                    title="Error",
+                    description="I don't have enough permissions to change their roles.",
+                    color=discord.Color.red(),
+                ).set_footer(text="Please fix the permissions."), delete_after=10
+            )
+
+        case = await self.get_case()
+
+        await self.log(
+            guild=ctx.guild,
+            embed=discord.Embed(
+                title="Role Added",
+                description=f"**Offender:** {member} \n**New Role:** {role} \n**Responsible moderator:** {ctx.author.mention}.",
+                color=discord.Color.green(),
+            ).set_footer(text=f"This is the {case} case."),
+        )
+
+        await ctx.send(
+            embed=discord.Embed(
+                title="**Success**",
+                description=f"Successfully changed {member.mention}'s roles. \n**New Role added:** {role}",
+                color=discord.Color.green(),
+            ).set_footer(text=f"This is the {case} case."), delete_after=60
+       
+
+    @commands.command()
+    @checks.has_permissions(PermissionLevel.ADMINISTRATOR)
+    async def unrole(self, ctx, role: discord.Role, member: discord.Member=None):
+        """Remove a role from a member."""
+        if member is None:
+            member = ctx.guild.get_member(match_user_id(ctx.channel.topic))
+            if member is None:
+                raise commands.MissingRequiredArgument(SimpleNamespace(name="unrole"))
+            
+        await member.remove_roles(role)
+        await ctx.send(f"Successfully removed the role from {member.name}!")
+
+    @commands.command(aliases=["makerole"])
+    @checks.has_permissions(PermissionLevel.ADMINISTRATOR)
+    async def createrole(self, ctx, name: str, color: str):
+        """create a role."""
+        color = "#" + color.strip("#")
+        
+        valid = re.search(r"^#(?:[0-9a-fA-F]{3}){1,2}$", color)
+        if not valid:
+            embed = discord.Embed(title="Failure", color=self.bot.main_color,
+                description="Please enter a **valid [hex code](https://htmlcolorcodes.com/color-picker)**")
+            return await ctx.send(embed=embed)
+
+        await ctx.guild.create_role(name=name, color=discord.Color(int(color.replace("#", "0x"), 0)))
+        await ctx.send("Successfully created the role!")
 
 def setup(bot):
     bot.add_cog(Moderation(bot))
