@@ -2,7 +2,7 @@ import discord
 import asyncio
 import re
 from discord.ext import commands
-from utils import checks
+from core import checks
 from mods.cog import Cog
 
 class Afk(Cog):
