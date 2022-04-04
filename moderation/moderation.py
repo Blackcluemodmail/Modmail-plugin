@@ -151,13 +151,12 @@ class Moderation(commands.Cog):
             return await ctx.send(f"{ctx.author.mention}"
         + (f" I have set your AFK: {reason}" if reason else "AFK")
 
-        counter = 0
-            async for message in channel.history(limit=200):
-           if message.author == client.user:
-           counter += 1:
-           await asyncio.sleep(60)
+              counter = 0
+              while counter <= int(mins)async for message in channel.history(limit=200) 
+                 counter += 1
+                 await asyncio.sleep(60)
 
-           if counter == int(mins):
+                if counter == int(mins):
 
                try:
                   await ctx.author.edit(nick=current_nick)
