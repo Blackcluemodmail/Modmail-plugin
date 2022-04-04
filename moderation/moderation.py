@@ -151,9 +151,9 @@ class Moderation(commands.Cog):
             return await ctx.send(f"{ctx.author.mention}"
         + (f" I have set your AFK: {reason}" if reason else "AFK")
 
-              counter = 0
-              while counter <= int(mins)
-                 counter += 1
+              int cou = 0
+              while int count <= int(mins)
+                 count += 1
                  await asyncio.sleep(60)
 
                 if counter == int(mins):
