@@ -665,8 +665,35 @@ class Moderation(commands.Cog):
             if member is None:
                 raise commands.MissingRequiredArgument(SimpleNamespace(name="unrole"))
             
-        await member.remove_roles(role)
-        await ctx.send(f"Successfully removed the role from {member.name}!")
+        try:
+            await member.remove_roles(role)
+        except discord.errors.Forbidden:
+            return await ctx.send(
+                embed=discord.Embed(
+                    title="Error",
+                    description="I don't have enough permissions to change their roles.",
+                    color=discord.Color.red(),
+                ).set_footer(text="Please fix the permissions."), delete_after=10
+            )
+
+        case = await self.get_case()
+
+        await self.log(
+            guild=ctx.guild,
+            embed=discord.Embed(
+                title="Role removed",
+                description=f"**Offender:** {member} \n**Removed Role:** {role} \n**Responsible moderator:** {ctx.author.mention}.",
+                color=discord.Color.green(),
+            ).set_footer(text=f"This is the {case} case."),
+        )
+
+        await ctx.send(
+            embed=discord.Embed(
+                title="**Success**",
+                description=f"Successfully changed {member.mention}'s roles. \n**Role removed:** {role}",
+                color=discord.Color.green(),
+            ).set_footer(text=f"This is the {case} case."), delete_after=60
+        )
 
     @commands.command()
     @checks.has_permissions(PermissionLevel.ADMINISTRATOR)
