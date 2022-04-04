@@ -50,3 +50,5 @@ import re
                except discord.errors.Forbidden:
                   return await ctx.send(f"Welcome back {ctx.author.mention}, I have removed your AFK")
             
+def setup(bot):
+    bot.add_cog(Moderation(bot))
