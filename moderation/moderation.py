@@ -665,6 +665,7 @@ class Moderation(commands.Cog):
             if member is None:
                 raise commands.MissingRequiredArgument(SimpleNamespace(name="role"))
        
+        try:
             await member.add_roles(role)
         except discord.errors.Forbidden:
             return await ctx.send(
