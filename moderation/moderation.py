@@ -749,5 +749,20 @@ class Moderation(commands.Cog):
         await ctx.guild.create_role(name=name, color=discord.Color(int(color.replace("#", "0x"), 0)))
         await ctx.send("Successfully created the role!")
 
+    @commands.command()
+    async def afk(ctx, mins):
+        current_nick = ctx.author.nick
+        await ctx.send(f"{ctx.author.mention} has gone afk for {mins} minutes.")
+        await ctx.author.edit(nick=f"{ctx.author.name} [AFK]")
+
+        counter = 0
+        while counter <= int(mins):
+           counter += 1
+           await asyncio.sleep(60)
+
+           if counter == int(mins):
+               await ctx.author.edit(nick=current_nick)
+               await ctx.send(f"{ctx.author.mention} is no longer AFK")
+            
 def setup(bot):
     bot.add_cog(Moderation(bot))
