@@ -249,22 +249,6 @@ class Moderation(commands.Cog):
             if not reason.endswith("."):
                 reason = reason + "."
 
-        msg = f"You have been banned from {ctx.guild.name}" + (
-            f" for: {reason}" if reason else "."
-        )
-
-        try:
-            await member.send(msg)
-        except discord.errors.Forbidden:
-            return await ctx.send(
-                embed=discord.Embed(
-                    title="Logged",
-                    description=f"User {member} has been banned. I couldn't DM them, they disabled DMs."
-                + (f" \n**Reason:** {reason}" if reason else "\n**Reason:** No reason given"),
-                    color=discord.Color.green(),
-                ).set_footer(text=f"This is the {case} case."), delete_after=10
-            )
-
         try:
             await member.ban(reason=reason, delete_message_days=0)
         except discord.errors.Forbidden:
