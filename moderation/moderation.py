@@ -101,45 +101,6 @@ class Moderation(commands.Cog):
                 )
             )
 
-    @commands.command(usage="<channel>")
-    @checks.has_permissions(PermissionLevel.MODERATOR)
-    async def setinfrchannel(self, ctx, channel: discord.TextChannel = None):
-        """Sets up a infr log channel."""
-        if channel == None:
-            return await ctx.send_help(ctx.command)
-
-        try:
-            await channel.send(
-                embed=discord.Embed(
-                    description=(
-                        "This channel has been set up to log actions.\n"
-                        "This means that I will send bans/warns/kicks here."
-                    ),
-                    color=self.bot.main_color,
-                )
-            )
-        except discord.errors.Forbidden:
-            await ctx.send(
-                embed=discord.Embed(
-                    title="Error",
-                    description="I don't have enough permissions to write in that channel.",
-                    color=discord.Color.red(),
-                ).set_footer(text="Please fix the permissions.")
-            )
-        else:
-            await self.db.find_one_and_update(
-                {"_id": "infr"},
-                {"$set": {str(ctx.guild.id): channel.id}},
-                upsert=True,
-            )
-            await ctx.send(
-                embed=discord.Embed(
-                    title="Success",
-                    description=f"{channel.mention} has been set up as infr channel.",
-                    color=self.bot.main_color,
-                )
-            )
-
     @commands.command(usage="<role>")
     @checks.has_permissions(PermissionLevel.MODERATOR)
     async def muterole(self, ctx, role: discord.Role = None):
