@@ -165,11 +165,6 @@ class Moderation(commands.Cog):
             ).set_footer(text=f"This is the {case} case."),
         )
 
-        await self.infr(
-            guild=ctx.guild
-            infrt=ctx.send("ok_hand warned {member} ({reason}) 
-           )
-
         try:
             await member.send(msg)
         except discord.errors.Forbidden:
