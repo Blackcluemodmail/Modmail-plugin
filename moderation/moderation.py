@@ -374,7 +374,7 @@ class Moderation(commands.Cog):
                         color=discord.Color.red(),
                         ).set_footer(text="Please fix the permissions."), delete_after=30
                      )
-            elif time != None:
+            else time != None:
                 await member.add_roles(role, reason=reason)
             except discord.errors.Forbidden:
                 return await ctx.send(
