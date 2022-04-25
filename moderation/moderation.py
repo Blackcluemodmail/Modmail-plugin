@@ -364,27 +364,15 @@ class Moderation(commands.Cog):
             pass
 
         try:
-            if time= None:
-                await member.add_roles(role, reason=reason)
-            except discord.errors.Forbidden:
-                return await ctx.send(
-                    embed=discord.Embed(
-                        title="Error",
-                        description="I don't have enough permissions to mute them.",
-                        color=discord.Color.red(),
-                        ).set_footer(text="Please fix the permissions."), delete_after=30
-                    )
-
-            else time != None:
-                await member.add_roles(role, reason=reason)
-            except discord.errors.Forbidden:
-                return await ctx.send(
-                    embed=discord.Embed(
-                        title="Error",
-                        description="I don't have enough permissions to mute them.",
-                        color=discord.Color.red(),
-                        ).set_footer(text="Please fix the permissions."), delete_after=30
-                    )
+            await member.add_roles(role, reason=reason)
+        except discord.errors.Forbidden:
+             return await ctx.send(
+                 embed=discord.Embed(
+                     title="Error",
+                     description="I don't have enough permissions to mute them.",
+                     color=discord.Color.red(),
+                     ).set_footer(text="Please fix the permissions."), delete_after=30
+                 )
 
         case = await self.get_case()
 
