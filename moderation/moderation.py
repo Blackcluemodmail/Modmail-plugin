@@ -137,7 +137,7 @@ class Moderation(commands.Cog):
         )
 
     @commands.command(usage="<member> [reason]")
-    @checks.has_permissions(PermissionLevel.MODERATOR)
+    @checks.has_permissions(PermissionLevel.MODERATOR, server_moderator=true)
     async def warn(self, ctx, member: discord.Member = None, *, reason=None):
         """
         Warns the specified member.
@@ -186,6 +186,12 @@ class Moderation(commands.Cog):
                 color=discord.Color.green(),
             ).set_footer(text=f"This is the {case} case."), delete_after=10
         )
+
+    @warn.error
+    async def war_error(error, ctx):
+        if isinstance(error, MissingPermissions):
+            text = "Sorry {}, you do not have permissions to do that!".format(ctx.message.author)
+            n bot.send_message(ctx.message.channel, text)
 
     @commands.command(usage="<member> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
