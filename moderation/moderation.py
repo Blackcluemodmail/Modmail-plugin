@@ -188,10 +188,11 @@ class Moderation(commands.Cog):
         )
 
     @warn.error
-    async def war_error(error, ctx):
+    async def warn_error(error, ctx):
         if isinstance(error, MissingPermissions):
-            text = "Sorry {}, you do not have permissions to do that!".format(ctx.message.author)
-            n bot.send_message(ctx.message.channel, text)
+            text = "Sorry {ctx.author.mention}, You do not have enough permissions to run this command. You need Server Moderator permissions to use this command."
+            await ctx.send(text)
+
 
     @commands.command(usage="<member> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
