@@ -138,7 +138,7 @@ class Moderation(commands.Cog):
         )
 
     @commands.command(usage="<member> [reason]")
-    @checks.has_permissions(PermissionLevel.MODERATOR, manage_nicknames, timeout_members)
+    @checks.has_permissions(PermissionLevel.MODERATOR, manage_nicknames=True, timeout_members=True) 
     async def warn(self, ctx, member: discord.Member = None, *, reason=None):
         """
         Warns the specified member.
