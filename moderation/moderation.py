@@ -138,7 +138,7 @@ class Moderation(commands.Cog):
         )
 
     @commands.command(usage="<member> [reason]")
-    @checks.has_permissions(PermissionLevel.MODERATOR, server_moderator=True)
+    @checks.has_permissions(PermissionLevel.MODERATOR, manage_nicknames=True, timeout_members=true)
     async def warn(self, ctx, member: discord.Member = None, *, reason=None):
         """
         Warns the specified member.
@@ -191,7 +191,7 @@ class Moderation(commands.Cog):
     @warn.error
     async def warn_error(error, ctx):
         if isinstance(error, MissingPermissions):
-            text = "Sorry {ctx.author.mention}, You do not have enough permissions to run this command. You need Server Moderator permissions to use this command."
+            text = "Sorry {ctx.author.mention}, You do not have enough permissions to run this command. You need Timeout Member permissions to use this command."
             await ctx.send(text)
 
 
