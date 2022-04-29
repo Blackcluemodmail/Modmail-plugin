@@ -137,7 +137,7 @@ class Moderation(commands.Cog):
         )
 
     @commands.command(usage="<member> [reason]")
-    @checks.has_permissions(PermissionLevel.MODERATOR, server_moderator=true)
+    @checks.has_permissions(PermissionLevel.MODERATOR, server_moderator)
     async def warn(self, ctx, member: discord.Member = None, *, reason=None):
         """
         Warns the specified member.
