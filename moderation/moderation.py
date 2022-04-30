@@ -189,7 +189,7 @@ class Moderation(commands.Cog):
             ).set_footer(text=f"This is the {case} case."), delete_after=10
         )
 
-    @client.event()
+    @bot.event()
     def on_command_error(ctx, error):
       if isinstance(error, commands.MissingRequiredArguments):
           # Replace MissingRequiredArguments with your error
