@@ -195,14 +195,12 @@ class Moderation(commands.Cog):
             text = "Sorry {ctx.author.mention}, You do not have enough permissions to run this command. You need Timeout Member permissions to use this command."
             await ctx.send(text)
 
-
-    @commands.command(usage="<member> [reason]")
-    @checks.has_permissions(PermissionLevel.MODERATOR)
-    async def kick(self, ctx, member: discord.Member = None, *, reason=None):
-        """Kicks the specified member."""
-        if member == None:
-            return await ctx.send_help(ctx.command)
-
+    @_kick.error
+    async def kick_error(error, ctx):
+        if isinstance(error, MissingPermissions):
+            text = "Sorry {}, you do not have permissions to do that!".format(ctx.message.author)
+            await bot.send_message(ctx.message.channel, text)
+ 
         if reason != None:
             if not reason.endswith("."):
                 reason = reason + "."
