@@ -9,7 +9,7 @@ import sys
 import re
 import asyncio
 
-class Autotrigger(commands.Cog):
+class MuteCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -23,4 +23,4 @@ class Autotrigger(commands.Cog):
             await ctx.send("Hello, this is a DM!")
 
 def setup(bot):
-    bot.add_cog(Autotrigger(bot))
+    bot.add_cog(MuteCog(bot))
