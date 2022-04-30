@@ -22,7 +22,7 @@ class Autotrigger(commands.Cog):
             return
 
         if message.content.startswith('$hello'):
-            await message.channel.send('Hello!')
+            await ctx.send('Hello!')
 
 def setup(bot):
     bot.add_cog(Autotrigger(bot))
