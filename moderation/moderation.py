@@ -195,12 +195,6 @@ class Moderation(commands.Cog):
             text = "Sorry {ctx.author.mention}, You do not have enough permissions to run this command. You need Timeout Member permissions to use this command."
             await ctx.send(text)
 
-    @warn.error
-    async def warn_error(error, ctx):
-        if isinstance(error, MissingPermissions):
-            text = "Sorry {}, you do not have permissions to do that!".format(ctx.message.author)
-            await bot.send_message(ctx.message.channel, text)
- 
         if reason != None:
             if not reason.endswith("."):
                 reason = reason + "."
