@@ -13,10 +13,10 @@ class Autotrigger(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
- def on_message(self, ctx):
- if message.content.startswith('yoo'):
-     channel = message.channel
-     await channel.send('Say hello!')
+def on_message(self, ctx):
+if message.content.startswith('yoo'):
+    channel = message.channel
+    await channel.send('Say hello!')
 
 def setup(bot):
     bot.add_cog(Autotrigger(bot))
