@@ -215,7 +215,7 @@ class Moderation(commands.Cog):
             ).set_footer(text=f"This is the {case} case.")
         )
 
-@commands.command(usage="<member>")
+    @commands.command(usage="<member>")
     @checks.has_permissions(PermissionLevel.MODERATOR)
     async def voicemove(self, ctx, *, member:discord.Member):
         """ 
