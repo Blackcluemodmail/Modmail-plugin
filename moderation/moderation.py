@@ -148,7 +148,7 @@ class Moderation(commands.Cog):
 
         try:
             guild = ctx.guild 
-            await member.edit(unmute=True)
+            await member.edit(mute=True)
         except discord.errors.Forbidden:
             return await ctx.send(
                 embed=discord.Embed(
