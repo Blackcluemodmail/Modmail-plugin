@@ -1,5 +1,8 @@
 import asyncio
 import discord
+
+client = discord.Client()
+
 import typing
 from discord.ext import commands
 from discord.ext.commands import has_permissions, MissingPermissions
@@ -12,8 +15,6 @@ import re
 class Autotrigger(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-
-client = discord.Client()
 
     @client.event
     async def on_message(self, ctx):
