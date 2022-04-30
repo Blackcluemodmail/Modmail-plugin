@@ -21,9 +21,8 @@ class Autotrigger(commands.Cog):
         if message.author == client.user:
             return
 
-        if message.content.startswith('$yoo'):
-            channel = message.channel
-            await channel.send('Say hello!')
+    if message.content.startswith('$hello'):
+        await message.channel.send('Hello!')
 
 def setup(bot):
     bot.add_cog(Autotrigger(bot))
