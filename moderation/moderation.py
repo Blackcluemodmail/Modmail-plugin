@@ -215,6 +215,46 @@ class Moderation(commands.Cog):
             ).set_footer(text=f"This is the {case} case.")
         )
 
+@commands.command(usage="<member>")
+    @checks.has_permissions(PermissionLevel.MODERATOR)
+    async def voicemove(self, ctx, *, member:discord.Member):
+        """ 
+        Voice moves the specified member
+        """
+        if member == None:
+            return await ctx.send_help(ctx.command)
+
+        try:
+            guild = ctx.guild 
+            channel = await guild.fetch_channel(channel_id) 
+            await member.move_to(channel)
+        except discord.errors.Forbidden:
+            return await ctx.send(
+                embed=discord.Embed(
+                    title="Error",
+                    description="I don't have enough permissions to move them.",
+                    color=discord.Color.red(),
+                ).set_footer(text="Please fix the permissions.")
+            )
+
+        case = await self.get_case()
+
+        await self.log(
+            guild=ctx.guild,
+            embed=discord.Embed(
+                title="Voice move",
+                description=f"{member} has been moved by {ctx.author.mention}"
+            ).set_footer(text=f"This is the {case} case."),
+        )
+
+        await ctx.send(
+            embed=discord.Embed(
+                title="Success",
+                description=f"{member} has been moved.",
+                color=self.bot.main_color,
+            ).set_footer(text=f"This is the {case} case.")
+        )
+
     @commands.command(usage="<member> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR) 
     @has_permissions(manage_nicknames=True)
