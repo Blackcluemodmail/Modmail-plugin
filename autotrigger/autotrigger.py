@@ -9,7 +9,7 @@ import traceback
 import sys
 import re
 
-class AutotriggerCog(commands.Cog):
+class Autotrigger(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -19,5 +19,6 @@ class AutotriggerCog(commands.Cog):
             channel = message.channel
             await channel.send('Say hello!')
 
+
  def setup(bot):
-    bot.add_cog(AutotriggerCog(bot))
+    bot.add_cog(Autotrigger(bot))
