@@ -14,6 +14,10 @@ class Autotrigger(commands.Cog):
         self.bot = bot
 
     @commands.command()
+    async def on_ready(message):
+        await ctx.send("Ready") 
+
+    @commands.command()
     async def on_message(self, message):
         if message.content.startswith("$hi"):
             await ctx.send('Hello!')
