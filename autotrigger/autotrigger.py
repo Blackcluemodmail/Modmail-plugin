@@ -18,6 +18,9 @@ class Autotrigger(commands.Cog):
 
     @client.event
     async def on_message(message):
+        if message.author == client.user:
+            return
+
         if message.content.startswith('yoo'):
             channel = message.channel
             await channel.send('Say hello!')
