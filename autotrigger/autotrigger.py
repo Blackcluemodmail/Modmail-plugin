@@ -16,7 +16,7 @@ class Autotrigger(commands.Cog):
         self.bot = bot
 
     @client.event
-    async def on_message(message):
+    async def on_message(self, message):
         if message.content == "hello":
             await message.channel.send('Hello!')
 
