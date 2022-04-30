@@ -137,6 +137,46 @@ class Moderation(commands.Cog):
             )
         )
 
+    @commands.command(usage="<member>")
+    @checks.has_permissions(PermissionLevel.MODERATOR)
+    async def voiceunmute(self, ctx, *, member:discord.Member):
+        """ 
+        Voice unmutes the specified member
+        """
+        if member == None:
+            return await ctx.send_help(ctx.command)
+
+        try:
+            user_obj = await guild.fetch_member(user_id)
+            await user_obj.edit(unmute=True)
+        except discord.errors.Forbidden:
+            return await ctx.send(
+                embed=discord.Embed(
+                    title="Error",
+                    description="I don't have enough permissions to unmute them.",
+                    color=discord.Color.red(),
+                ).set_footer(text="Please fix the permissions.")
+            )
+
+        case = await self.get_case()
+
+        await self.log(
+            guild=ctx.guild,
+            embed=discord.Embed(
+                title="Voice unmute",
+                description=f"{member} has been unmuted by {ctx.author.mention}"
+            ).set_footer(text=f"This is the {case} case."),
+        )
+
+        await ctx.send(
+            embed=discord.Embed(
+                title="Success",
+                description=f"{member} has been unmuted.",
+                color=self.bot.main_color,
+            ).set_footer(text=f"This is the {case} case.")
+        )
+
+
     @commands.command(usage="<member> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR) 
     @has_permissions(manage_nicknames=True)
