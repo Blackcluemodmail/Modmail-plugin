@@ -17,9 +17,10 @@ class MuteCog(commands.Cog):
         self.bot = bot
 
     @bot.event
-    async def on_message(msg):
-        print("in on_message #1")
-        await bot.process_commands(msg)  # so `Command` instances will still get called
+    async def on_message(message):
+        if message.content.startswith("helo"):
+            print("hey")
+            await bot.process_commands(messages) # so `Command` instances will still get called
 
 
     @bot.listen()
