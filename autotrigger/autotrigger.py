@@ -15,7 +15,7 @@ class Autotrigger(commands.Cog):
 
     @commands.command()
     async def on_ready():
-    print("Ready") 
+        print("Ready") 
 
     @commands.command()
     async def on_message(self, message):
