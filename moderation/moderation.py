@@ -148,7 +148,7 @@ class Moderation(commands.Cog):
 
         try:
             guild = ctx.guild
-            user_obj = await guild.fetch_member(user_id)
+            user_obj = await guild.fetch_user(user_id)
             await user_obj.edit(unmute=True)
         except discord.errors.Forbidden:
             return await ctx.send(
@@ -238,7 +238,7 @@ class Moderation(commands.Cog):
 
     @commands.command(usage="<member> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
-    async def kick(self, ctx, member: discord.Member = None, *, reason=None):
+    async def kick(self, ctx, user: discord.User=None, *, reason=None):
         """Kicks the specified member."""
         if member == None:
             return await ctx.send_help(ctx.command)
