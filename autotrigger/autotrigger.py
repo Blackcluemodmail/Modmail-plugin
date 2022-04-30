@@ -19,7 +19,7 @@ class Autotrigger(commands.Cog):
 
     @commands.event
     async def on_message(message):
-        if "dm" == message.content.lower()
+        if message.content == "dm":
             await message.author.send("Hello, this is a DM!")
 
 def setup(bot):
