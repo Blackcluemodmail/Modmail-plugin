@@ -1,4 +1,7 @@
 import discord
+
+client = discord.Client()
+
 import typing
 from discord.ext import commands
 from discord.ext.commands import has_permissions, MissingPermissions
@@ -13,12 +16,12 @@ class MuteCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
-    async def hi(self, ctx, message):
+    @client.command()
+    async def hi(ctx, message):
         await ctx.send("Hello, this is a DM!")
 
-    @commands.command() 
-    async def on_message(self, ctx, message):
+    @client.event() 
+    async def on_message(ctx, message):
         if message.content == "hi":
             await ctx.send("Hello, this is a DM!")
 
