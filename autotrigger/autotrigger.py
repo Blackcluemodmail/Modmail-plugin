@@ -20,7 +20,7 @@ class Autotrigger(commands.Cog):
     @commands.command() 
     async def on_message(message):
         if message.content == "dm":
-            await message.author.send("Hello, this is a DM!")
+            await ctx.send("Hello, this is a DM!")
 
 def setup(bot):
     bot.add_cog(Autotrigger(bot))
