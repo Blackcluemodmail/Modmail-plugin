@@ -14,12 +14,12 @@ class Autotrigger(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def dm(ctx):
+    async def hi(ctx):
         await ctx.send("Hello, this is a DM!")
 
     @commands.command() 
     async def on_message(message):
-        if message.content == "dm":
+        if message.content == "hi":
             await ctx.send("Hello, this is a DM!")
 
 def setup(bot):
