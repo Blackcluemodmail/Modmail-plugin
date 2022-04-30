@@ -189,12 +189,6 @@ class Moderation(commands.Cog):
             ).set_footer(text=f"This is the {case} case."), delete_after=10
         )
 
-    @warn.error
-    async def warn_error(error, ctx):
-        if isinstance(error, MissingPermissions):
-            text = "Sorry {}, you do not have permissions to do that!".format(ctx.message.author)
-            await bot.send_message(ctx.message.channel, text)
-
     @commands.command(usage="<member> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
     async def kick(self, ctx, member: discord.Member = None, *, reason=None):
