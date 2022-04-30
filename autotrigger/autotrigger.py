@@ -9,13 +9,11 @@ import sys
 import re
 import asyncio
 
-client = discord.Client()
-
 class Autotrigger(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @client.event
+    @commands.command()
     async def on_message(self, message):
         if message.content == "hello":
             await message.channel.send('Hello!')
