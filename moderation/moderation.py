@@ -147,8 +147,7 @@ class Moderation(commands.Cog):
             return await ctx.send_help(ctx.command)
 
         try:
-            guild = ctx.guild
-            user_obj = await guild.fetch_member(user=user) 
+            guild = ctx.guild 
             await user_obj.edit(unmute=True)
         except discord.errors.Forbidden:
             return await ctx.send(
