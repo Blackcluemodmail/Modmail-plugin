@@ -1,6 +1,6 @@
 import discord
 
-client = discord.Client()
+bot = commands.Bot('.')
 
 import typing
 from discord.ext import commands
@@ -16,14 +16,15 @@ class MuteCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @client.event()
-    async def hi(ctx, message):
-        await ctx.send("Hello, this is a DM!")
+    @bot.event
+    async def on_message(msg):
+        print("in on_message #1")
+        await bot.process_commands(msg)  # so `Command` instances will still get called
 
-    @client.event() 
-    async def on_message(ctx, message):
-        if message.content == "hi":
-            await ctx.send("Hello, this is a DM!")
+
+    @bot.listen()
+    async def on_message(msg):
+        print("in on_message #2")
 
 def setup(bot):
     bot.add_cog(MuteCog(bot))
