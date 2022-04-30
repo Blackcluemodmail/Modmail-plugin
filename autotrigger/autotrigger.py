@@ -16,7 +16,7 @@ class MuteCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @client.command()
+    @client.event()
     async def hi(ctx, message):
         await ctx.send("Hello, this is a DM!")
 
