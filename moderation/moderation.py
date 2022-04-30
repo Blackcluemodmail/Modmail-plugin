@@ -189,7 +189,7 @@ class Moderation(commands.Cog):
             ).set_footer(text=f"This is the {case} case."), delete_after=10
         )
 
-    @warn.error()
+    @warn.error
     async def warn_error(error, ctx):
         if isinstance(error, MissingPermissions):
             text = "Sorry {ctx.author.mention}, You do not have enough permissions to run this command. You need Timeout Member permissions to use this command."
