@@ -14,11 +14,11 @@ class MuteCog(commands.Cog):
         self.bot = bot
 
     @commands.command()
-    async def hi(ctx, message):
+    async def hi(self, ctx, *, message):
         await ctx.send("Hello, this is a DM!")
 
     @commands.command() 
-    async def on_message(ctx, message):
+    async def on_message(self, ctx, *, message):
         if message.content == "hi":
             await ctx.send("Hello, this is a DM!")
 
