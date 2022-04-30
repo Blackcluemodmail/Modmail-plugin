@@ -217,7 +217,7 @@ class Moderation(commands.Cog):
 
     @commands.command(usage="<member>")
     @checks.has_permissions(PermissionLevel.MODERATOR)
-    async def voicemove(self, ctx, *, member:discord.Member):
+    async def voicemove(self, ctx, member:discord.Member, *, channel=None):
         """ 
         Voice moves the specified member
         """
