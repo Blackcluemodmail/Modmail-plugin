@@ -20,4 +20,4 @@ class AutotriggerCog(commands.Cog):
             await channel.send('Say hello!')
 
  def setup(bot):
-    bot.add_cog(Autotrigger(bot))
+    bot.add_cog(AutotriggerCog(bot))
