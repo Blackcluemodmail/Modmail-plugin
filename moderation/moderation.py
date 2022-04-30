@@ -188,6 +188,7 @@ class Moderation(commands.Cog):
                 color=discord.Color.green(),
             ).set_footer(text=f"This is the {case} case."), delete_after=10
         )
+
     @warn.error
     async def warn_error(error, ctx):
         if isinstance(error, MissingPermissions):
