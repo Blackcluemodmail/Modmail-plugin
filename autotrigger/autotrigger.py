@@ -13,6 +13,7 @@ class Autotrigger(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    @commands.event
     async def on_message(self, ctx):
         if message.content.startswith('yoo'):
             channel = message.channel
