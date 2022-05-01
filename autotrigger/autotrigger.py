@@ -19,7 +19,7 @@ class AutoTrigger(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message, member: discord.Member=None):
         if message.author.id == bot.user.id:
-        return
+            return
 
         if "how to join smp" in message.content:
             await message.channel.send(f"{member.author.mention} ,check <#944498884351246336>", delete_after=5)
