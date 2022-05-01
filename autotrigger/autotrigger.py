@@ -19,7 +19,7 @@ class AutoTrigger(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         if 'hi' in message.content():
-            await message.channel.send("`CloudyOrk #ClueArmy` is AFK: kuchzada hi mobile chala liya aaj, purso ata hu ab")
+            await message.channel.send("`CloudyOrk is AFK: kuchzada hi mobile chala liya aaj, purso ata hu ab")
 
 
 def setup(bot):
