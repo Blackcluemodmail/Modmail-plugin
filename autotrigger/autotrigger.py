@@ -19,7 +19,7 @@ class AutoTrigger(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         if message.content == "hi":
-            await message.channel.send('Hi')
+            await message.channel.send('Hi', delete_after=5)
         if message.content.startswith('!goodbye') :
             await message.channel.send('Goodbye!')
 
