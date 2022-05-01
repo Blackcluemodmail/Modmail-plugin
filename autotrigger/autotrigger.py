@@ -18,7 +18,7 @@ class AutoTrigger(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if int(667378631336525824) in message.content():
+        if 'hi' in message.content():
             await message.channel.send("`CloudyOrk #ClueArmy` is AFK: kuchzada hi mobile chala liya aaj, purso ata hu ab")
 
 
