@@ -17,9 +17,7 @@ class AutoTrigger(commands.Cog):
         self.bot = bot
 
     @commands.Cog.listener()
-    async def on_message(self, message, member: discord.Member=None):
-        if message.author.id == bot.user.id:
-            return
+    async def on_message(self, ctx: discord.ext.commands.Context, message, member: discord.Member=None):
         if "how to join smp" in message.content:
             await message.channel.send(f"{member.author.mention} ,check <#944498884351246336>", delete_after=5)
         if message.content.startswith('!goodbye') :
