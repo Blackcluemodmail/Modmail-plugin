@@ -16,7 +16,7 @@ class AutoTrigger(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.Cogs.listener()
+    @commands.Cog.listener()
     async def on_message(message):
         if message.content.startswith("helo"):
             await ctx.send("hey") 
