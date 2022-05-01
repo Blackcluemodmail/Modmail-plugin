@@ -18,7 +18,7 @@ class AutoTrigger(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if "CloudyOrk" in message.content():
+        if "667378631336525824" in message.content():
             await asyncio.sleep(1)
             await message.channel.send(f"`CloudyOrk #ClueArmy` is AFK: kuchzada hi mobile chala liya aaj, purso ata hu ab")
 
