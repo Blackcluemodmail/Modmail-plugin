@@ -18,12 +18,11 @@ class AutoTrigger(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if "Han_bhai" in message.content:
+        if "Han_bhai" in message.content.lower():
             await asyncio.sleep(1)
             await message.delete()
-        if "han_bhai" in message.content:
-            await asyncio.sleep(1)
-            await message.delete()
+            await message.channel.send(f"Do not spam" {message.author.mention}")
+
 
 def setup(bot):
     bot.add_cog(AutoTrigger(bot))
