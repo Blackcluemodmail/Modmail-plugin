@@ -17,12 +17,13 @@ class AutoTrigger(commands.Cog):
         self.bot = bot
 
     @commands.Cog.listener()
-    async def on_message(self, message, ctx):
-        author = ctx.author
-        if "how to join smp" in message.content:
-            await message.channel.send(f"{ctx.author.mention} ,check <#944498884351246336>", delete_after=5)
-        if message.content.startswith('!goodbye') :
-            await message.channel.send('Goodbye!')
+    async def on_message(self, message):
+        if "Han_bhai" in message.content:
+            await asyncio.sleep(1)
+            await message.delete()
+        if "han_bhai" in message.content:
+            await asyncio.sleep(1)
+            await message.delete()
 
 def setup(bot):
     bot.add_cog(AutoTrigger(bot))
