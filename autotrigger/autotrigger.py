@@ -17,7 +17,7 @@ class AutoTrigger(commands.Cog):
         self.bot = bot
 
     @commands.Cog.listener()
-    async def on_message(self, ctx, *, message=None):
+    async def on_message(self, *, message):
         author = ctx.author
         if "how to join smp" in message.content:
             await message.channel.send(f"{ctx.author.mention} ,check <#944498884351246336>", delete_after=5)
