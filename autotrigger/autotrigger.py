@@ -18,9 +18,6 @@ class AutoTrigger(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.author == client.user:
-            return  
-
         if message.content.startswith('!hi') :
             await message.channel.send('Hi!')
         if message.content.startswith('!goodbye') :
