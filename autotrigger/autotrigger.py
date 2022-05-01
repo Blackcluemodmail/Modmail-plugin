@@ -12,20 +12,14 @@ import sys
 import re
 import asyncio
 
-class MuteCog(commands.Cog):
+class AutoTrigger(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @bot.event
+    @commands.Cogs.listener()
     async def on_message(message):
         if message.content.startswith("helo"):
-            print("hey")
-            await bot.process_commands(messages) # so `Command` instances will still get called
-
-
-    @bot.listen()
-    async def on_message(msg):
-        print("in on_message #2")
+            await ctx.send("hey") 
 
 def setup(bot):
-    bot.add_cog(MuteCog(bot))
+    bot.add_cog(AutoTrigger(bot))
