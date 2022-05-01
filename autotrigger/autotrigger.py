@@ -17,9 +17,14 @@ class AutoTrigger(commands.Cog):
         self.bot = bot
 
     @commands.Cog.listener()
-    async def on_message(message=None, *,):
-        if message.content.startswith("helo"):
-            await ctx.send("hey") 
+    async def on_message(message):
+        if message.author == client.user:
+            return  
+
+        if message.content.startswith('!hi') :
+            await message.channel.send('Hi!')
+        if message.content.startswith('!goodbye') :
+            await message.channel.send('Goodbye!')
 
 def setup(bot):
     bot.add_cog(AutoTrigger(bot))
