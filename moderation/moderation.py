@@ -307,13 +307,6 @@ class Moderation(commands.Cog):
             ).set_footer(text=f"This is the {case} case."), delete_after=10
         )
 
-    @commands.Cog.listener() 
-    async def on_command_error(ctx, error):
-      if isinstance(error, commands.MissingRequiredArguments):
-          # Replace MissingRequiredArguments with your error
-        ctx.send("Please pass all required arguments", delete_after=3)
-
-
     @commands.command(usage="<member> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
     @has_permissions(kick_members=True)
