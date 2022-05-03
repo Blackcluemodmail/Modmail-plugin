@@ -308,7 +308,7 @@ class Moderation(commands.Cog):
         )
 
     @commands.Cog.listener() 
-    async def on_command_error(ctx, error):
+    async def on_command_error(self, ctx, error):
        if isinstance(error, commands.MissingRequiredArguments):
           # Replace MissingRequiredArguments with your error
         ctx.send("Please pass all required arguments", delete_after=3)
