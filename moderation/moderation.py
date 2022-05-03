@@ -309,7 +309,7 @@ class Moderation(commands.Cog):
 
     @commands.Cog.listener() 
     async def on_command_error(self, ctx, error):
-       if isinstance(error, commands.MissingRequiredArguments):
+       if isinstance(error, commands.manage_nicknames):
           # Replace MissingRequiredArguments with your error
         ctx.send("Please pass all required arguments", delete_after=3)
 
