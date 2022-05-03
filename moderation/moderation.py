@@ -307,14 +307,16 @@ class Moderation(commands.Cog):
             ).set_footer(text=f"This is the {case} case."), delete_after=10
         )
 
+    @commands.Cog.listener() 
     def on_command_error(ctx, error):
       if isinstance(error, commands.MissingRequiredArguments):
           # Replace MissingRequiredArguments with your error
-        ctx.send("Please pass all required arguments")
+        ctx.send("Please pass all required arguments", delete_after=3)
 
 
     @commands.command(usage="<member> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
+    @has_permissions(kick_members=True)
     async def kick(self, ctx, member: discord.Member=None, *, reason=None):
         """Kicks the specified member."""
         if member == None:
@@ -366,6 +368,7 @@ class Moderation(commands.Cog):
 
     @commands.command(usage="<member> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
+    @has_permissions(ban_members=True)
     async def ban(self, ctx, member: discord.Member = None, *, reason=None):
         """Bans the specified member."""
         if member == None:
@@ -408,6 +411,7 @@ class Moderation(commands.Cog):
 
     @commands.command(usage="<member> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
+    @has_permissions(ban_members=True)
     async def unban(self, ctx, user: discord.User = None, *, reason=None):
         """Unbans the specified member."""
         if user == None:
@@ -451,6 +455,7 @@ class Moderation(commands.Cog):
  
     @commands.command(usage="<member> <duration> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
+    @has_permissions(manage_nicknames=True)
     async def mute(self, ctx, member: discord.Member = None, time:TimeConverter = None, *, reason=None):
         """Mutes the specified member, format should be in 1d, 10m, 10s."""
         if member == None:
@@ -545,6 +550,7 @@ class Moderation(commands.Cog):
 
     @commands.command(usage="<member> [reason]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
+    @has_permissions(manage_nicknames=True)
     async def unmute(self, ctx, member: discord.Member = None, *, reason=None):
         """Unmutes the specified member."""
         if member == None:
@@ -616,6 +622,7 @@ class Moderation(commands.Cog):
 
     @commands.command(usage="<member> [nickname]")
     @checks.has_permissions(PermissionLevel.MODERATOR)
+    @has_permissions(manage_nicknames=True)
     async def nick(self, ctx, member: discord.Member = None, *, nick):
         """Change the nickname of specified user."""
         if member == None:
@@ -653,6 +660,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @checks.has_permissions(PermissionLevel.MODERATOR)
+    @has_permissions(manage_channels=True)
     async def slowmode(self, ctx, time, channel: discord.TextChannel = None):
         """Set a slowmode to a channel
         It is not possible to set a slowmode longer than 6 hours
@@ -687,6 +695,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @checks.has_permissions(PermissionLevel.MODERATOR)
+    @has_permissions(manage_channels=True)
     async def slowmode_off(self, ctx, channel: discord.TextChannel = None):
         """Turn off the slowmode in a channel"""
         if not channel:
@@ -699,6 +708,7 @@ class Moderation(commands.Cog):
           
     @commands.command(usage="<amount>")
     @checks.has_permissions(PermissionLevel.MODERATOR)
+    @has_permissions(manage_messages=True)
     async def purge(self, ctx, amount: int = 1):
         """Purge the specified amount of messages."""
         max = 2000
@@ -769,6 +779,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @checks.has_permissions(PermissionLevel.ADMINISTRATOR)
+    @has_permissions(manage_roles=True)
     async def unrole(self, ctx, member: discord.Member = None, *, role: discord.Role):
         """Remove a role from a member."""
         if member is None:
@@ -808,6 +819,7 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @checks.has_permissions(PermissionLevel.ADMINISTRATOR)
+    @has_permissions(manage_roles=True)
     async def role(self, ctx, member: discord.Member=None, *, role: discord.Role):
         """Assign a role to a member."""
         if member is None:
@@ -847,6 +859,7 @@ class Moderation(commands.Cog):
 
     @commands.command(aliases=["makerole"])
     @checks.has_permissions(PermissionLevel.ADMINISTRATOR)
+    @has_permissions(manage_roles=True)
     async def createrole(self, ctx, name: str, color: str):
         """create a role."""
         color = "#" + color.strip("#")
