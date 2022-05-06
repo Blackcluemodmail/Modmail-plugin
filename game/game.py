@@ -43,11 +43,10 @@ class Game(commands.Cog):
 
 
     @commands.command()
-    async def game(self, ctx):
+    async def game(self, gameW, ctx):
     """ Play a game with bot""" 
-    you = int(input("Choose one: 'snake(s)', 'water(w)', 'gun(g)'") 
-    comp = "Choose one: 'snake(s)', 'water(w)', 'gun(g)'"
-    random = randint(1,3)
+    comp = "Choose one: Snake(s) Water(w) Gun(g)"
+    random = random.randint(1,3)
     if random == 1:
         comp = 's'
     elif random == 2:
@@ -55,11 +54,13 @@ class Game(commands.Cog):
     elif random == 3:
         comp = 'g' 
 
+    you = input("Choose one: Snake(s) Water(w) Gun(g)")
+
     await ctx.send(f("Computer chose {comp}\n You chose {you}") 
-    
-    if gameW == True:
+    game = gameW(comp, you)
+    if game == True:
         await ctx.send("You won!") 
-    elif gameW == None:
+    elif game == None:
         await ctx.send("Tie!") 
     else:
         await ctx.send("You lose!") 
