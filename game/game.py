@@ -44,7 +44,7 @@ class Game(commands.Cog):
             elif you == w:
                 return True
 
-    bot = "Choose one: Snake(s) Water(w) Gun(g)"
+    comp = "Choose one: Snake(s) Water(w) Gun(g)"
     random = random.randint(1,3)
     if random == 1:
         comp = 's'
@@ -53,10 +53,10 @@ class Game(commands.Cog):
     elif random == 3:
         comp = 'g' 
 
-    user = input("Choose one: Snake(s) Water(w) Gun(g)")
+    you = input("Choose one: Snake(s) Water(w) Gun(g)")
 
     await ctx.send(f("Computer chose {comp}\n You chose {you}") 
-    if gameW is None:
+    if gameW(comp, you) is None:
         await ctx.send("Tie!") 
     elif:
         await ctx.send("You won") 
