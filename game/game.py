@@ -17,6 +17,10 @@ class Game(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    @commands.command()
+    async def game(self, gameW, ctx):
+    """ Play a game with bot""" 
+
     def gameW(comp, you):
         if comp == you:
             return None
@@ -41,10 +45,6 @@ class Game(commands.Cog):
             elif you == w:
                 return True
 
-
-    @commands.command()
-    async def game(self, gameW, ctx):
-    """ Play a game with bot""" 
     comp = "Choose one: Snake(s) Water(w) Gun(g)"
     random = random.randint(1,3)
     if random == 1:
@@ -65,5 +65,6 @@ class Game(commands.Cog):
     else:
         await ctx.send("You lose!") 
     
-     
-    
+      
+def setup(bot):
+    bot.add_cog(Game(bot))
