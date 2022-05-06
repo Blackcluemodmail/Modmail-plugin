@@ -56,7 +56,8 @@ class Game(commands.Cog):
     you = input("Choose one: Snake(s) Water(w) Gun(g)")
 
     await ctx.send(f("Computer chose {comp}\n You chose {you}") 
-    if gameW(comp, you) is None:
+    g_res: discord.Message = await self.bot.wait_for(comp, you)
+    if gameW(g_res) is None:
         await ctx.send("Tie!") 
     elif:
         await ctx.send("You won") 
