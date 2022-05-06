@@ -44,7 +44,7 @@ class Game(commands.Cog):
             elif you == w:
                 return True
 
-    comp = "Choose one: Snake(s) Water(w) Gun(g)"
+    bot = "Choose one: Snake(s) Water(w) Gun(g)"
     random = random.randint(1,3)
     if random == 1:
         comp = 's'
@@ -53,10 +53,10 @@ class Game(commands.Cog):
     elif random == 3:
         comp = 'g' 
 
-    you = input("Choose one: Snake(s) Water(w) Gun(g)")
+    user = input("Choose one: Snake(s) Water(w) Gun(g)")
 
     await ctx.send(f("Computer chose {comp}\n You chose {you}") 
-    game = gameW(comp, you)
+    game = gameW(bot, user)
     if game == True:
         await ctx.send("You won!") 
     elif game == None:
