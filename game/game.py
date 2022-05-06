@@ -19,8 +19,7 @@ class Game(commands.Cog):
 
     @commands.command()
     async def game(self, gameW, ctx):
-    """ Play a game with bot""" 
-
+        """ Play a game with bot""" 
     def gameW(comp, you):
         if comp == you:
             return None
