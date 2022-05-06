@@ -13,3 +13,8 @@ from types import SimpleNamespace
 import traceback
 import sys
 
+class Game(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
+
+    @commands.command
