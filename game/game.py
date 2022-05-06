@@ -56,10 +56,10 @@ class Game(commands.Cog):
     user = input("Choose one: Snake(s) Water(w) Gun(g)")
 
     await ctx.send(f("Computer chose {comp}\n You chose {you}") 
-    game = gameW(bot, user)
-    if game == True:
+    gameW(bot, user)
+    if gameW == True:
         await ctx.send("You won!") 
-    elif game == None:
+    elif gameW == None:
         await ctx.send("Tie!") 
     else:
         await ctx.send("You lose!") 
